@@ -6,6 +6,7 @@
 /design
 README-template.md
 style-guide.md
+ ui-debug.log
 
 # Avoid accidental XD or Figma upload if you convert the design file
 #######################################################

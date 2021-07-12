@@ -1,3 +1,5 @@
+
+
 //variables formulario dosis
 
 let loginForm = document.querySelector('#loginForm');
@@ -19,7 +21,20 @@ function validarLogin (ev) {
     ev.preventDefault();
     if(email.value && password.value != ''){
         if(emailRegex.test(email.value)){
-            console.log('success ' + email+ " " + password)
+            let userEmail = email.value;
+            let userPassword = password.value;
+            
+            firebase.auth().signInWithEmailAndPassword(userEmail, userPassword)
+            .then((userCredential) => {
+                // Signed in
+                var user = userCredential.user;
+                // ...
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
+
         } else {
             console.log('email no valido');
         }
@@ -58,6 +73,7 @@ function validadFormulario (ev) {
 
 
 document.addEventListener("DOMContentLoaded",function() {
+    
     form.addEventListener('submit', validadFormulario);
     loginForm.addEventListener('submit', validarLogin)
     let headerBtn = document.querySelector('#hamburger');

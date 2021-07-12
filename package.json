@@ -1,0 +1,12 @@
+{
+  "name": "michiapp",
+  "version": "1.0.0",
+  "description": "webapp dosis medicamento michi",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live-server --open=index.html"
+  },
+  "author": "Francisco Jimenez <frankiiize@gmail.com>",
+  "license": "ISC"
+}

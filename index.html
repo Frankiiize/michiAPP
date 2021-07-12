@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="container">
+            <header class="headerContainer">
+                <div class="headerContainer__icons">
+                    <div class="headerContainer__icons-logo">
+                        <img src="assets/logo.png" alt="logo gatito">
+                    </div>
+                    <div class="headerHamburger" id="hamburger">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </div>
+
+              
+                    <form class="headerContainer__login" action="" method="POST">
+                        <label for="email">
+                            <input type="text" name="email" id="email" placeholder="Email" autocomplete="email">
+                        </label>
+                        <label for="password">
+                            <input type="text" name="password" id="password" placeholder="password" autocomplete="current-password">
+                        </label>
+                    </form>
+             
+                
+            </header>
+
+
+            <section style="margin-top: 50px;" class="formSection">
+                <form action="" method="post" id="form">
+                    <label for="name">
+                        <span>Nombre</span>
+                        <input type="text" name="name" id="name">
+                    </label>
+                    <label for="check1">
+                        <input type="checkbox" name="tarde" id="dia" value="dia"> dia
+                    </label>
+                    <label for="check2">
+                        <input type="checkbox" name="noche" id="noche" value="noche"> noche
+                    </label>
+                    <label for="dia">
+                        <input type="date" name="" id="fecha">
+                    </label>
+                    <input type="submit" value="Enviar">
+                </form>
+                <div id="print"></div>
+            </section>
+            <section class="dataSection"></section>
+        </div>
+        <script src="src/index.js"></script>
+    </body>
+    </html>
+</body>
+</html>

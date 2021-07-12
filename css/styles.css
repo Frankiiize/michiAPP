@@ -117,8 +117,21 @@ body {
   border: none;
   background-color: transparent;
 }
+.headerContainer__login label input::placeholder {
+  color: #FFFFFF;
+  padding: 5px;
+}
 .headerContainer__login label input:focus {
   border: 1px solid #607D8B;
+}
+.headerContainer__login-sendBtn {
+  width: 50%;
+  height: 40px;
+  color: #FFFFFF;
+  background-color: #212121;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
 .formSection {
@@ -153,7 +166,7 @@ body {
   padding: 5px;
 }
 .formSection__form label input {
-  width: 70%;
+  width: 80%;
 }
 .formSection__form label input[type=checkbox] {
   width: 20px;

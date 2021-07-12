@@ -1,11 +1,32 @@
+//variables formulario dosis
+
+let loginForm = document.querySelector('#loginForm');
+let email = document.querySelector('#email');
+let password = document.querySelector('#password');
+let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+//variables formulario dosis
+
+//variables formulario dosis
 let form = document.querySelector('#form');
 let name = document.querySelector('#name');
 let checkD = document.querySelector('#dia');
 let checkN = document.querySelector('#noche');
 let fecha = document.querySelector('#fecha');
 let print = document.querySelector('#print')
+//variables formulario dosis
 
-
+function validarLogin (ev) {
+    ev.preventDefault();
+    if(email.value && password.value != ''){
+        if(emailRegex.test(email.value)){
+            console.log('success ' + email.value + " " +password.value )
+        } else {
+            console.log('email no valido');
+        }
+    } else {
+        console.log('completa los campos');
+    }
+}
 
 
 function validadFormulario (ev) {
@@ -20,7 +41,7 @@ function validadFormulario (ev) {
         setTimeout(() => {
             textData.remove();
         },1000);
-        console.log(` ${name.value} ${checkD.value} ${checkN.value} ${fecha.value} `)
+        console.log(`success ${name.value} ${checkD.value} ${checkN.value} ${fecha.value} `)
     } else  {
         let textData = document.createElement('span');
         textData.append(` completa los campos `)
@@ -38,11 +59,11 @@ function validadFormulario (ev) {
 
 document.addEventListener("DOMContentLoaded",function() {
     form.addEventListener('submit', validadFormulario);
+    loginForm.addEventListener('submit', validarLogin)
     let headerBtn = document.querySelector('#hamburger');
     let loginContainer = document.querySelector('.headerContainer__login');
 
-    headerBtn.onclick = () => {
-        
+    headerBtn.onclick = () => {  
         headerBtn.classList.toggle("change");
         loginContainer.classList.toggle("d-flex");
     }

@@ -67,10 +67,24 @@ body {
                height: 100%;
                border: none;
                background-color: transparent;
-           }
+            }
+            input::placeholder{
+                color: $primary-color-text;
+                padding: 5px;
+                
+           } 
            input:focus {
                border: 1px solid $primary-color;
            }
+       }
+       &-sendBtn {
+        width: 50%;
+        height: 40px;
+        color: $primary-color-text;
+        background-color:$primary-text-color ;
+        border: none;
+        border-radius: 5px;
+        margin-right: 10px;
        }
           
     }
@@ -106,7 +120,7 @@ body {
                 padding: 5px;
             }
             input {
-                width: 70%;
+                width: 80%;
             }
             input[type=checkbox] {
                 width: 20px;

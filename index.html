@@ -8,15 +8,6 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
         <div class="container">
             <header class="headerContainer">
                 <div class="headerContainer__icons">
@@ -42,24 +33,26 @@
              
                 
             </header>
+            <h1>Dosis administrada</h1>
 
-
-            <section style="margin-top: 50px;" class="formSection">
-                <form action="" method="post" id="form">
+            <section  class="formSection">
+                <form action="" method="post" id="form" class="formSection__form">
                     <label for="name">
                         <span>Nombre</span>
                         <input type="text" name="name" id="name">
                     </label>
                     <label for="check1">
-                        <input type="checkbox" name="tarde" id="dia" value="dia"> dia
+                        <span>dia</span>
+                        <input type="checkbox" name="tarde" id="dia" value="dia"> 
                     </label>
                     <label for="check2">
-                        <input type="checkbox" name="noche" id="noche" value="noche"> noche
+                        <span>noche</span> 
+                        <input type="checkbox" name="noche" id="noche" value="noche"> 
                     </label>
                     <label for="dia">
                         <input type="date" name="" id="fecha">
                     </label>
-                    <input type="submit" value="Enviar">
+                    <input class="formSection__form-sendBtn" type="submit" value="Enviar">
                 </form>
                 <div id="print"></div>
             </section>

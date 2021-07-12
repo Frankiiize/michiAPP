@@ -1,11 +1,18 @@
+body {
+    background-color: $divider-color;
+}
 .container {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
+   // grid-template-rows:  minmax(150px, auto);
     grid-template-rows: auto;
+    row-gap: 20px;
     justify-items: center;
+    margin: 0 auto;
 }
 .headerContainer {
+    grid-column: 1 / 2;
     width: 100%;
     height: 80px;
     display: flex;
@@ -13,6 +20,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    background-color: $primary-color-light;
     &__icons {
         width: 80%;
         height: 80px;
@@ -34,6 +42,7 @@
     }
     &__login {
         width: 80%;
+        max-width: 300px;
         height: 110px;
         display: none;
         flex-direction: column;
@@ -41,7 +50,7 @@
         justify-content: space-around;
         align-items: flex-end;
         position: absolute;
-        background-color: #2C2E43;
+        background-color: $primary-color;
         border-radius: 5px;
         padding: 10px;
         margin-right: 10px;
@@ -51,18 +60,82 @@
            width: 70%;
            height: 30px;
            margin-right: 10px;
-           border: 1px solid white;
+           border: 1px solid $primary-text-color;
            margin-bottom: 7px;
            input {
+               width: 100%;
+               height: 100%;
                border: none;
                background-color: transparent;
+           }
+           input:focus {
+               border: 1px solid $primary-color;
            }
        }
           
     }
     
 }
-
+.formSection {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    width: 100%;
+    height: 150px;
+    &__form {
+        width: 80%;
+        max-width: 350px;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        margin: 0 auto;
+        background-color: $accent-color;
+        border-radius: 5px;
+        align-items: center;
+        label{
+            display: flex;
+            width: 100%;
+            height: 40px;
+            justify-content: flex-start;
+           
+            align-items: center;
+            span {
+                width: 20%;
+                font-size: $ff-normal;
+                color: $primary-text-color;
+                padding: 5px;
+            }
+            input {
+                width: 70%;
+            }
+            input[type=checkbox] {
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+                position: relative;
+                left: 0;
+            }
+            input[type=date]{
+                width: 100%;
+            }
+        }
+        &-sendBtn {
+            width: 80%;
+            height: 40px;
+            color: $primary-color-text;
+            background-color:$primary-text-color ;
+            border: none;
+            border-radius: 5px;
+        }
+        &-sendBtn:hover {
+            cursor: pointer;
+        }
+        
+    }
+}
+h1 {
+   
+}
 
 
 

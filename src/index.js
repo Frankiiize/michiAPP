@@ -19,7 +19,23 @@ function validarLogin (ev) {
     ev.preventDefault();
     if(email.value && password.value != ''){
         if(emailRegex.test(email.value)){
-            console.log('success ' + email+ " " + password)
+            let userEmail = email.value;
+            let userPassword = password.value;
+            
+            firebase.auth().signInWithEmailAndPassword(userEmail, userPassword)
+            .then((userCredential) => {
+                // Signed in
+                console.log(user)
+                var user = userCredential.user;
+                console.log(user)
+                // ...
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorCode + " " + errorMessage)
+            });
+
         } else {
             console.log('email no valido');
         }

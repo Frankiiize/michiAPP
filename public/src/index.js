@@ -1,12 +1,12 @@
 
 
-//variables formulario dosis
+//variables formulario login
 
 let loginForm = document.querySelector('#loginForm');
 let email = document.querySelector('#email');
 let password = document.querySelector('#password');
 let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-//variables formulario dosis
+//variables formulario login
 
 //variables formulario dosis
 let form = document.querySelector('#form');

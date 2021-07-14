@@ -44,6 +44,10 @@ html {
   transform: rotate(45deg) translate(-8px, -8px);
 }
 
+.icon-google {
+  filter: invert(1);
+}
+
 body {
   background-color: #ebebeb;
 }
@@ -90,12 +94,10 @@ body {
 .headerContainer__login {
   width: 80%;
   max-width: 300px;
-  height: 110px;
+  min-height: 110px;
   display: none;
   flex-direction: column;
-  align-self: flex-end;
   justify-content: space-around;
-  align-items: flex-end;
   position: absolute;
   background-color: #607D8B;
   border-radius: 5px;
@@ -104,34 +106,55 @@ body {
   top: 80px;
   right: 0;
 }
-.headerContainer__login label {
-  width: 70%;
-  height: 30px;
-  margin-right: 10px;
-  border: 1px solid #212121;
-  margin-bottom: 7px;
-}
-.headerContainer__login label input {
+.headerContainer__login form {
   width: 100%;
-  height: 100%;
-  border: none;
-  background-color: transparent;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.headerContainer__login label input::placeholder {
-  color: #FFFFFF;
+.headerContainer__login form label {
+  width: 100%;
+  border: 1px solid #CFD8DC;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+.headerContainer__login form label input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
   padding: 5px;
 }
-.headerContainer__login label input:focus {
-  border: 1px solid #607D8B;
+.headerContainer__login form label input::placeholder {
+  color: #757575;
 }
 .headerContainer__login-sendBtn {
-  width: 50%;
+  width: 70%;
   height: 40px;
   color: #FFFFFF;
   background-color: #212121;
   border: none;
   border-radius: 5px;
   margin-right: 10px;
+}
+.headerContainer__login-rsLogin {
+  width: 100%;
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+}
+.headerContainer__login-rsLogin span {
+  color: #CFD8DC;
+  font-size: 1.2rem;
+}
+.headerContainer__login-rsLogin i {
+  margin-left: 15px;
+}
+.headerContainer__login-rsLogin i:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 200ms;
 }
 
 .formSection {

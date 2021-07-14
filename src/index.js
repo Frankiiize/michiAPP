@@ -1,10 +1,13 @@
-//variables formulario dosis
+//variables formulario login
 
 let loginForm = document.querySelector('#loginForm');
 let email = document.querySelector('#email');
 let password = document.querySelector('#password');
 let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-//variables formulario dosis
+let googleBtn = document.querySelector('#google');
+var provider = new firebase.auth.GoogleAuthProvider();
+//variables formulario login
+
 
 //variables formulario dosis
 let form = document.querySelector('#form');
@@ -69,13 +72,46 @@ function validadFormulario (ev) {
   
 }
 
+function  loginWhitGoogle () {
+    debugger
+    firebase.auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+        /* @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        console.log('paso' + user.displayName)
+        
+
+
+
+        // ...
+    }).catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        console.error(error.message)
+        console.error(credential)
+        // ...
+    });
+}
+
 
 
 
 
 document.addEventListener("DOMContentLoaded",function() {
     form.addEventListener('submit', validadFormulario);
-    loginForm.addEventListener('submit', validarLogin)
+    loginForm.addEventListener('submit', validarLogin);
+    googleBtn.addEventListener('click',loginWhitGoogle);
     let headerBtn = document.querySelector('#hamburger');
     let loginContainer = document.querySelector('.headerContainer__login');
 

@@ -5,60 +5,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://kit.fontawesome.com/9b73edbcb0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-        <div class="container">
-            <header class="headerContainer">
-                <div class="headerContainer__icons">
-                    <div class="headerContainer__icons-logo">
-                        <img src="assets/logo.png" alt="logo gatito">
-                    </div>
-                    <div class="headerHamburger" id="hamburger">
-                        <div class="bar1"></div>
-                        <div class="bar2"></div>
-                        <div class="bar3"></div>
-                    </div>
+    <div class="container">
+        <header class="headerContainer">
+            <div class="headerContainer__icons">
+                <div class="headerContainer__icons-logo">
+                    <img src="assets/logo.png" alt="logo gatito">
                 </div>
+                <div class="headerHamburger" id="hamburger">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </div>
 
-              
-                <form id="loginForm" class="headerContainer__login" action="" method="POST">
+            <div class="headerContainer__login" style="display: none;">
+                
+                <form id="loginForm"  action="" method="POST">
                     <label for="email">
                         <input type="text" name="email" id="email" placeholder="Email" autocomplete="email">
                     </label>
                     <label for="password">
                         <input type="password" name="password" id="password" placeholder="password" autocomplete="current-password">
                     </label>
-                    <input class="headerContainer__login-sendBtn" type="submit" value="Login">
+                    <input class="headerContainer__login-sendBtn" type="button" value="Login" id="loginBtn">
                 </form>
-            
-                
-            </header>
-            <h1>Dosis administrada</h1>
 
-            <section  class="formSection">
-                <form action="" method="post" id="form" class="formSection__form">
-                    <label for="name">
-                        <span>Nombre</span>
-                        <input type="text" name="name" id="name">
-                    </label>
-                    <label for="check1">
-                        <span>dia</span>
-                        <input type="checkbox" name="tarde" id="dia" value="dia"> 
-                    </label>
-                    <label for="check2">
-                        <span>noche</span> 
-                        <input type="checkbox" name="noche" id="noche" value="noche"> 
-                    </label>
-                    <label for="dia">
-                        <input type="date" name="" id="fecha">
-                    </label>
-                    <input class="formSection__form-sendBtn" type="submit" value="Enviar">
-                </form>
-                <div id="print"></div>
-            </section>
-            <section class="dataSection"></section>
-        </div>
+                <div class="headerContainer__login-rsLogin">
+                    <span>Login with</span>
+                    <i class="icon-google fab fa-google fa-2x" id="google"></i>
+                </div>
+
+            </div>
+
+            
+            <div class="headerContainer__login-logged" id="userLogged" style="display: none;">
+                <div class="headerContainer__login-logged__user">
+                    <img width="50px" src="assets/userImg.png" alt="usuer photo" id="userPhoto">
+                    <span id="userNameDisplay">User Name</span>
+                </div>
+                <input type="button" class="headerContainer__login-sendBtn" value="Cerrar Sesion" name="" id="logoutBtn">
+
+            </div> 
+        
+            
+        </header>
+        <h1>Dosis administrada</h1>
+
+        <section  class="formSection">
+            <form action="" method="post" id="form" class="formSection__form">
+                <label for="name">
+                    <span>Nombre</span>
+                    <input type="text" name="name" id="name">
+                </label>
+                <label for="check1">
+                    <span>dia</span>
+                    <input type="checkbox" name="tarde" id="dia" value="dia"> 
+                </label>
+                <label for="check2">
+                    <span>noche</span> 
+                    <input type="checkbox" name="noche" id="noche" value="noche"> 
+                </label>
+                <label for="dia">
+                    <input type="date" name="" id="fecha">
+                </label>
+                <input class="formSection__form-sendBtn" type="submit" value="Enviar">
+            </form>
+            <div id="print"></div>
+        </section>
+        <section class="dataSection"></section>
+    </div>
         
       <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
@@ -75,7 +94,8 @@
     <!-- Previously loaded Firebase SDKs -->
     <!-- iniciador firebase, configuracion -->
     <script type="module" src="src/config.js"></script>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="sweetalert2.all.min.js"></script> -->
   
     <script src="src/index.js"></script>
 </body>

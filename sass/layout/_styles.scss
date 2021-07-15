@@ -44,7 +44,7 @@ body {
         width: 80%;
         max-width: 300px;
         min-height: 110px;
-        display: none;
+        //display: none;
         flex-direction: column;
         justify-content: space-around;
         position: absolute;
@@ -54,6 +54,7 @@ body {
         margin-right: 10px;
         top: 80px;
         right: 0;
+        z-index: $zIndex_LoginContainer;
         form{
             width: 100%;
             height: auto;
@@ -76,6 +77,10 @@ body {
                 input::placeholder{
                     color:$secondary-text-color ;
                 }
+                input:focus{
+                    outline: 1px solid $primary-text-color;
+
+                }
                 
             }
         }
@@ -87,7 +92,13 @@ body {
         background-color:$primary-text-color ;
         border: none;
         border-radius: 5px;
-        margin-right: 10px;
+        margin: 10px;
+        align-self: center;
+       }
+       &-sendBtn:hover{
+           cursor: pointer;
+           background-color: $primary-color-light;
+           transition: 700ms;
        }
        &-rsLogin{
            width: 100%;
@@ -106,6 +117,39 @@ body {
                transform: scale(1.1);
                transition: 200ms;
            }
+       }
+       &-logged {
+        width: 50%;
+        max-width: 300px;
+        min-height: 110px;
+        //display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        position: absolute;
+        background-color: #607D8B;
+        border-radius: 5px;
+        padding: 10px;
+        margin-right: 10px;
+        top: 80px;
+        right: 0;
+        z-index: $zIndex_LoginContainer;
+           &__user{
+               display: flex;
+               flex-direction: row;
+               align-items: center;
+               justify-content: flex-end;
+               margin: 10px;
+           }
+           img {
+               width: 50px;
+               border-radius: 50%;
+           }
+           span {
+               margin-left: 10px;
+               color: $primary-color-light;
+               font-size: $ff-normal;
+           }
+           
        }
           
     }
@@ -167,9 +211,6 @@ body {
         }
         
     }
-}
-h1 {
-   
 }
 
 

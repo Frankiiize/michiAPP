@@ -14,6 +14,8 @@ html {
 /* ---------------------/FONTS--------------------- */
 /* ---------------------COLORS--------------------- */
 /* ---------------------/COLORS--------------------- */
+/* ----------------------Z-INDEX--------------------- */
+/* ---------------------/Z-INDEX--------------------- */
 .d-none {
   display: none;
 }
@@ -95,7 +97,6 @@ body {
   width: 80%;
   max-width: 300px;
   min-height: 110px;
-  display: none;
   flex-direction: column;
   justify-content: space-around;
   position: absolute;
@@ -105,6 +106,7 @@ body {
   margin-right: 10px;
   top: 80px;
   right: 0;
+  z-index: 10;
 }
 .headerContainer__login form {
   width: 100%;
@@ -129,6 +131,9 @@ body {
 .headerContainer__login form label input::placeholder {
   color: #757575;
 }
+.headerContainer__login form label input:focus {
+  outline: 1px solid #212121;
+}
 .headerContainer__login-sendBtn {
   width: 70%;
   height: 40px;
@@ -136,7 +141,13 @@ body {
   background-color: #212121;
   border: none;
   border-radius: 5px;
-  margin-right: 10px;
+  margin: 10px;
+  align-self: center;
+}
+.headerContainer__login-sendBtn:hover {
+  cursor: pointer;
+  background-color: #CFD8DC;
+  transition: 700ms;
 }
 .headerContainer__login-rsLogin {
   width: 100%;
@@ -155,6 +166,37 @@ body {
   cursor: pointer;
   transform: scale(1.1);
   transition: 200ms;
+}
+.headerContainer__login-logged {
+  width: 50%;
+  max-width: 300px;
+  min-height: 110px;
+  flex-direction: column;
+  justify-content: space-around;
+  position: absolute;
+  background-color: #607D8B;
+  border-radius: 5px;
+  padding: 10px;
+  margin-right: 10px;
+  top: 80px;
+  right: 0;
+  z-index: 10;
+}
+.headerContainer__login-logged__user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 10px;
+}
+.headerContainer__login-logged img {
+  width: 50px;
+  border-radius: 50%;
+}
+.headerContainer__login-logged span {
+  margin-left: 10px;
+  color: #CFD8DC;
+  font-size: 1.6rem;
 }
 
 .formSection {

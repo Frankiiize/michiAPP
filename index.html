@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="headerContainer__login">
+            <div class="headerContainer__login" style="display: none;">
                 
                 <form id="loginForm"  action="" method="POST">
                     <label for="email">
@@ -31,14 +31,25 @@
                     <label for="password">
                         <input type="password" name="password" id="password" placeholder="password" autocomplete="current-password">
                     </label>
-                    <input class="headerContainer__login-sendBtn" type="submit" value="Login">
+                    <input class="headerContainer__login-sendBtn" type="button" value="Login" id="loginBtn">
                 </form>
+
                 <div class="headerContainer__login-rsLogin">
                     <span>Login with</span>
                     <i class="icon-google fab fa-google fa-2x" id="google"></i>
                 </div>
+
             </div>
+
             
+            <div class="headerContainer__login-logged" id="userLogged" style="display: none;">
+                <div class="headerContainer__login-logged__user">
+                    <img width="50px" src="assets/userImg.png" alt="usuer photo" id="userPhoto">
+                    <span id="userNameDisplay">User Name</span>
+                </div>
+                <input type="button" class="headerContainer__login-sendBtn" value="Cerrar Sesion" name="" id="logoutBtn">
+
+            </div> 
         
             
         </header>
@@ -83,7 +94,8 @@
     <!-- Previously loaded Firebase SDKs -->
     <!-- iniciador firebase, configuracion -->
     <script type="module" src="src/config.js"></script>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="sweetalert2.all.min.js"></script> -->
   
     <script src="src/index.js"></script>
 </body>

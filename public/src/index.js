@@ -1,3 +1,4 @@
+
 //variables formulario login
 let headerBtn = document.querySelector('#hamburger');
 let loginForm = document.querySelector('#loginForm');
@@ -19,6 +20,16 @@ let logoutBtn = document.querySelector('#logoutBtn');
     //logout
 
 //variables formulario login
+
+//variables baseDatos
+var db = firebase.firestore(); 
+//variables baseDatos
+
+//variables imprimir data
+let docData = [];
+let dataMout = document.querySelector('#dataSection');
+
+//variables imprimir data
 
 //sweeALERTSCONFIG
 const Toast = Swal.mixin({
@@ -111,25 +122,52 @@ let  validarLogin =  (ev) => {
 
 function validadFormulario (ev) {
     ev.preventDefault();
+    let user = firebase.auth().currentUser;  
     let ischeck1 = checkD.checked;
     let ischeck2 = checkN.checked;
-    debugger
-    if(ischeck1 ^ ischeck2 && name.value != '' && fecha.value !=''){
-        let textData = document.createElement('span');
-        textData.append(` ${name.value} ${checkD.value} ${checkN.value} ${fecha.value} `)
-        print.append(textData);
-        setTimeout(() => {
-            textData.remove();
-        },1000);
-        console.log(`success ${name.value} ${checkD.value} ${checkN.value} ${fecha.value} `)
-    } else  {
-        let textData = document.createElement('span');
-        textData.append(` completa los campos `)
-        print.append(textData);
-        setTimeout(() => {
-            textData.remove();
-        },1000);
+debugger
+    if (user){
+        if(ischeck1 ^ ischeck2 && name.value != '' && fecha.value !=''){
+            if(ischeck1){
+
+                db.collection("dosis").add({
+                    user: user.email,
+                    mascota: name.value,
+                    dosisTurno: checkD.value,
+                    fecha: fecha.value
+                })
+                .then((docRef) => {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                });
+            } else {
+                db.collection("dosis").add({
+                    user: user.email,
+                    mascota: name.value,
+                    dosisTurno: checkN.value,
+                    fecha: fecha.value
+                })
+                .then((docRef) => {
+                    console.log("Document written with ID: ", docRef.id);
+                })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                });
+            }
+            
+            
+            console.log(`success ${name.value} ${checkD.value} ${checkN.value} ${fecha.value} `)
+        } else  {
+           console.log('llena los campos')
+        }
+    } else {
+        console.log('tienes que estar registrado')
     }
+
+
+    
   
 }
 
@@ -169,15 +207,6 @@ function  loginWhitGoogle () {
     });
 }
 
-/* function renderLogBtn (Container, textValue, btnId) {
-    let singOutBtn = document.createElement('input');
-        singOutBtn.type = 'submit';
-        singOutBtn.classList.add('headerContainer__login-sendBtn');
-        singOutBtn.value = textValue;
-        singOutBtn.id = btnId;
-        //singOutBtn.onclick = 'logout()';
-        Container.appendChild(singOutBtn)
-} */
 
 /* let fireListener = () => {
 
@@ -256,6 +285,59 @@ function logout () {
           });
     }
 }
+/* 
+class dbData {
+    constructor(docId, userName, mascota, fecha, dosisTurno){
+        this.docId = docId;
+        this.userName = userName;
+        this.mascota = mascota,
+        this.fecha = fecha,
+        this.dosisTurno = dosisTurno
+    }
+}
+ */
+
+let consultarDosis = () => {
+    let dataMout = document.querySelector('#dataSection');
+    db.collection("dosis").get()
+    .then((querySnapshot) => {
+        //debugger
+        querySnapshot.forEach((doc) => {
+            //debugger
+            // doc.data() is never undefined for query doc snapshots
+           // console.log(doc.id, " => ", doc.data());
+            let userName = doc.data().user; 
+            let mascota = doc.data().mascota;
+            let fecha = doc.data().fecha;
+            let dosisTurno = doc.data().dosisTurno;
+        
+            renderData(userName,mascota,fecha,dosisTurno);
+            
+            
+
+        });
+    }).catch(error => {
+        console.error(error);
+    });
+}
+function renderData (userName,mascota,fecha,dosisTurno) {
+    //debugger
+    let div = document.createElement('div');
+    let spanName = document.createElement('span');
+    let spanmascota = document.createElement('span');
+    let spanfecha = document.createElement('span');
+    let spandosisTurno = document.createElement('span');
+
+    spanName.append(userName);
+    spanmascota.append(mascota);
+    spanfecha.append(fecha);
+    spandosisTurno.append(dosisTurno);
+    div.appendChild(spanName);
+    div.appendChild(spanmascota);
+    div.appendChild(spanfecha);
+    div.appendChild(spandosisTurno);
+    dataMout.append(div);
+}
 
 
 document.addEventListener("DOMContentLoaded",function() {
@@ -266,6 +348,10 @@ document.addEventListener("DOMContentLoaded",function() {
     hammburBtn();
     validarLogin();
     logout();
+    consultarDosis();
+    //renderDbData();
+
+
 
    
 });

@@ -328,8 +328,9 @@ class dbData {
 
 
 let consultarDosis = async () => {
-    let dataMout = document.querySelector('#dataSection');
-    await db.collection("dosis").get()
+    //let dataMout = document.querySelector('#dataSection');
+    await db.collection("dosis")
+    .orderBy("serverDate", "desc").get()
     .then((querySnapshot) => {
         //debugger
         querySnapshot.forEach((doc) => {

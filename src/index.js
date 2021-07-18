@@ -328,7 +328,11 @@ class dbData {
 
 
 let consultarDosis = async () => {
+<<<<<<< HEAD
     //let dataMout = document.querySelector('#dataSection');
+=======
+    let dataMout = document.querySelector('#dataSection');
+>>>>>>> 433b49bfc22e3dea50fed48ec6f3b1abd7279325
     await db.collection("dosis")
     .orderBy("serverDate", "desc").get()
     .then((querySnapshot) => {

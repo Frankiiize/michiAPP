@@ -50,8 +50,75 @@ html {
   filter: invert(1);
 }
 
+.swal2-popup {
+  font-size: 1.5rem !important;
+}
+
+.swal2-confirm {
+  width: 70%;
+  height: 40px;
+  color: #FFFFFF;
+  background-color: #212121;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  align-self: center;
+}
+
+.swal2-confirm:hover {
+  cursor: pointer;
+}
+
+.formSection__form, .headerContainer__login form label {
+  width: 100%;
+  border: 1px solid #CFD8DC;
+  border-radius: 5px;
+  margin: 5px 0;
+}
+.formSection__form input, .headerContainer__login form label input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+}
+.formSection__form input::placeholder, .headerContainer__login form label input::placeholder {
+  color: #757575;
+}
+.formSection__form input:focus, .headerContainer__login form label input:focus {
+  outline: 1px solid #212121;
+}
+
+.dataSection__cardsContainer-dosis i, .dataSection__cardsContainer-fecha i, .dataSection__cardsContainer-mascota i, .dataSection__cardsContainer-user i {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-self: flex-end;
+  margin-right: 50px;
+}
+
+.dataSection__cardsContainer-user i {
+  background-image: url("../../assets/icons/user.png");
+}
+
+.dataSection__cardsContainer-mascota i {
+  background-image: url("../../assets/icons/patita.png");
+}
+
+.dataSection__cardsContainer-fecha i {
+  background-image: url("../../assets/icons/calendario.png");
+}
+
+.dataSection__cardsContainer-dosis i {
+  background-image: url("../../assets/icons/medicamento.png");
+}
+
 body {
   background-color: #ebebeb;
+  font-family: "Barlow", sans-serif;
 }
 
 .container {
@@ -114,25 +181,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.headerContainer__login form label {
-  width: 100%;
-  border: 1px solid #CFD8DC;
-  border-radius: 5px;
-  margin: 5px 0;
-}
-.headerContainer__login form label input {
-  width: 100%;
-  height: 40px;
-  border: none;
-  border-radius: 4px;
-  padding: 5px;
-}
-.headerContainer__login form label input::placeholder {
-  color: #757575;
-}
-.headerContainer__login form label input:focus {
-  outline: 1px solid #212121;
 }
 .headerContainer__login-sendBtn {
   width: 70%;
@@ -203,9 +251,10 @@ body {
   grid-column: 1/2;
   grid-row: 3/4;
   width: 100%;
-  height: 150px;
 }
 .formSection__form {
+  box-shadow: 0 0 2px 0px;
+  border: none;
   width: 80%;
   max-width: 350px;
   min-height: 150px;
@@ -213,7 +262,6 @@ body {
   flex-direction: column;
   padding: 10px;
   margin: 0 auto;
-  background-color: #ff5622e7;
   border-radius: 5px;
   align-items: center;
 }
@@ -222,6 +270,7 @@ body {
   width: 100%;
   height: 40px;
   justify-content: flex-start;
+  margin-bottom: 20px;
   align-items: center;
 }
 .formSection__form label span {
@@ -229,9 +278,7 @@ body {
   font-size: 1.6rem;
   color: #212121;
   padding: 5px;
-}
-.formSection__form label input {
-  width: 80%;
+  margin-right: 15px;
 }
 .formSection__form label input[type=checkbox] {
   width: 20px;
@@ -255,6 +302,57 @@ body {
   cursor: pointer;
 }
 
+.dataSection {
+  display: grid;
+  margin: 50px auto;
+  width: 90%;
+  max-width: 1440px;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-auto-rows: 150px;
+  gap: 20px;
+}
+.dataSection__cardsContainer {
+  display: grid;
+  grid-template-columns: minmax(200px, 1fr);
+  border: 1px solid #ebebeb;
+  background-color: #CFD8DC;
+}
+.dataSection__cardsContainer-user {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+.dataSection__cardsContainer-mascota {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+.dataSection__cardsContainer-fecha {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+.dataSection__cardsContainer-dosis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
 .headerHamburger {
   display: inline-block;
   cursor: pointer;

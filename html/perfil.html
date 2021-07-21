@@ -9,14 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <div class="container">
         <header class="headerContainer">
             <div class="headerContainer__icons">
                 <div class="headerContainer__icons-logo">
-                    <img src="assets/logo.png" alt="logo gatito">
+                    <img src="/assets/logo.png" alt="logo gatito">
                 </div>
                 <div class="headerHamburger" id="hamburger">
                     <div class="bar1"></div>
@@ -48,7 +48,7 @@
             
             <div class="headerContainer__login-logged" id="userLogged" style="display: none;">
                 <div class="headerContainer__login-logged__user">
-                    <img width="50px" src="assets/userImg.png" alt="usuer photo" id="userPhoto">
+                    <img width="50px" src="/assets/userImg.png" alt="usuer photo" id="userPhoto">
                     <a href="html/perfil.html" id="userNameDisplay">User Name</a>
                 </div>
                 <input type="button" class="headerContainer__login-sendBtn" value="Cerrar Sesion" name="" id="logoutBtn">
@@ -59,7 +59,7 @@
         </header>
         <h1>Dosis administrada</h1>
 
-        <section  class="formSection">
+        <!-- <section  class="formSection">
             <form action="" method="post" id="form" class="formSection__form">
                 <label for="name">
                     <span>Mascota</span>
@@ -79,12 +79,9 @@
                 <input class="formSection__form-sendBtn" type="submit" value="Enviar">
             </form>
             <div id="print"></div>
-        </section>
+        </section> -->
     </div>
-    <section id="dataSection" class="dataSection">
-
-    </section>
-        
+         
       <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -99,11 +96,11 @@
 
     <!-- Previously loaded Firebase SDKs -->
     <!-- iniciador firebase, configuracion -->
-    <script type="module" src="src/config.js"></script>
+    <script type="module" src="/src/config.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- <script src="sweetalert2.all.min.js"></script> -->
     <!-- my scripts -->
     <!-- <script src="src/dosis.js"></script> -->
-    <script type="module" src="src/index.js"></script>
+    <script type="module" src="/src/perfil.js"></script>
 </body>
 </html>

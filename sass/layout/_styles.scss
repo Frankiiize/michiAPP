@@ -127,11 +127,13 @@ body {
                width: 50px;
                border-radius: 50%;
            }
-           span {
+           span, a {
                margin-left: 10px;
                color: $primary-color-light;
                font-size: $ff-normal;
+               text-decoration: none;
            }
+
            
        }
           

@@ -241,10 +241,11 @@ body {
   width: 50px;
   border-radius: 50%;
 }
-.headerContainer__login-logged span {
+.headerContainer__login-logged span, .headerContainer__login-logged a {
   margin-left: 10px;
   color: #CFD8DC;
   font-size: 1.6rem;
+  text-decoration: none;
 }
 
 .formSection {

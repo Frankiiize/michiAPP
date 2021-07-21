@@ -1,4 +1,4 @@
-
+import hammburBtn from './hamburger.js'
 //variables formulario login
 let headerBtn = document.querySelector('#hamburger');
 let loginForm = document.querySelector('#loginForm');
@@ -254,41 +254,7 @@ function  loginWhitGoogle () {
     });
 }
 
-let hammburBtn = () => {
-    headerBtn.onclick = () => { 
-        //debugger
-        headerBtn.classList.toggle("change");
-        firebase.auth().onAuthStateChanged((user) => {
-            if(user && loginContainer.style.display == 'none'){
-                if(userLoggedContainer.style.display == 'none' ){
-                    userLoggedContainer.style.display = 'flex';
-                    //debugger
-                    if(user.photoURL && user.displayName != null){
-                        userNameDisplay.innerHTML = `${user.displayName}`;
-                        userPhotoDisplay.src = `${user.photoURL}`;
-                    } else {
-                        userNameDisplay.innerHTML = `${email.value}`;
-                        userPhotoDisplay.src = "assets/userImg.png";
-                    } 
-                } else {
-                    userLoggedContainer.style.display = 'none';
-                }
-                
-                
-            } else {
-                if(user == null ){
-                    if(loginContainer.style.display == 'none'){
-                        loginContainer.style.display = 'flex';
-    
-                    } else {
-    
-                        loginContainer.style.display = 'none';
-                    }
-                }
-            }           
-        })
-    }
-}
+
 
 function logout () {
     logoutBtn.onclick = () =>{
@@ -314,31 +280,42 @@ function logout () {
 }
 
 let consultarEnRealTime = () => {
-    db.collection("dosis")
-    .orderBy('serverDate', 'desc')
-    .limit(1)
-    .onSnapshot((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            //debugger
-            if (querySnapshot.metadata.hasPendingWrites) {        
-                    let docId = doc.id;
-                    let userName =  doc.data().user; 
-                    let mascota =  doc.data().mascota;
-                    let fecha =  doc.data().fecha;
-                    let dosis =  doc.data().dosisTurno;
-                    let serverDate = doc.data().serverDate;
-                    
-                    console.log(docId + userName + mascota +fecha +dosis +serverDate)
-                    //dataDosis.push(new dbData(userName,mascota,fecha,dosis,dosis,serverDate))
-                    //console.log(dataDosis);
-                    renderRealtime(userName,mascota,fecha,dosis,dosis,serverDate);
-                } else {
-                    return console.log('nada por escribir')
-                }
-        } )
-        
-       
+    firebase.auth().onAuthStateChanged((userloged) => {
+        const user = firebase.auth().currentUser;
+        if(user){
+            console.log(user.email)
+            db.collection("dosis")
+            .where('userId', '==', user.uid )
+            .orderBy('serverDate', 'desc')
+            .limit(1)
+            .onSnapshot((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    //debugger
+                    if (querySnapshot.metadata.hasPendingWrites) {        
+                            let docId = doc.id;
+                            let userName =  doc.data().user; 
+                            let mascota =  doc.data().mascota;
+                            let fecha =  doc.data().fecha;
+                            let dosis =  doc.data().dosisTurno;
+                            let serverDate = doc.data().serverDate;
+                            
+                            console.log(docId + userName + mascota +fecha +dosis +serverDate)
+                            //dataDosis.push(new dbData(userName,mascota,fecha,dosis,dosis,serverDate))
+                            //console.log(dataDosis);
+                            renderRealtime(userName,mascota,fecha,dosis,dosis,serverDate);
+                        } else {
+                            return console.log('nada por escribir')
+                        }
+                } )
+                
+               
+            })
+        }
+        else {
+            console.log('no hay user')
+        }
     })
+   
    
 }
 
@@ -382,7 +359,7 @@ function renderRealtime (userName, mascota, fecha, dosis) {
 
 }
 
- let consultarDosis = async () => {
+/*  let consultarDosis = async () => {
    
     await db.collection("dosis")
     .orderBy("serverDate", "desc").get()
@@ -408,7 +385,7 @@ function renderRealtime (userName, mascota, fecha, dosis) {
     //debugger
     //console.log(docData)
     renderDocData (docData) ;
-} 
+}  */
 
 function renderDocData (array) {
    for(let item of array){
@@ -452,7 +429,39 @@ function renderDocData (array) {
 
    }
 }
+let getDosisUsuario = () => {
+    firebase.auth().onAuthStateChanged((userloged) => {
+        const user = firebase.auth().currentUser;
+        const userEmail = user.email;
+        
+        if(user) {
+            //debugger
+            //console.log(`usuario ${userEmail}`);
+            db.collection('dosis')
+            .where('userId', '==', user.uid )
+            .orderBy('serverDate', 'desc')
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    //console.log(doc.id, " => ", doc.data());
+                    let docId = doc.id;
+                    let userName =  doc.data().user; 
+                    let mascota =  doc.data().mascota;
+                    let fecha =  doc.data().fecha;
+                    let dosis =  doc.data().dosisTurno;
+                    let serverDate = doc.data().serverDate;
+                    docData.push(new dbData(docId, userName, mascota,fecha,dosis,serverDate))
+                })
+                //console.log(docData);
+                renderDocData(docData);
+            }) 
+           
 
+        }else {
+            console.log('no hay nadie loging')
+        }
+    })
+}
 
 document.addEventListener("DOMContentLoaded",function() {
     form.addEventListener('submit', validadFormulario);
@@ -460,7 +469,10 @@ document.addEventListener("DOMContentLoaded",function() {
     hammburBtn();
     validarLogin();
     logout();
-    consultarDosis();
+  
     consultarEnRealTime();
+    getDosisUsuario();
+    //getMascotasUsuario();
 
 });
+

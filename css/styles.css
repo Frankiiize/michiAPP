@@ -160,6 +160,11 @@ body {
 .headerContainer__icons-logo img {
   width: 100%;
 }
+.headerContainer__icons-logo img:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: 200ms;
+}
 .headerContainer__login {
   width: 80%;
   max-width: 300px;

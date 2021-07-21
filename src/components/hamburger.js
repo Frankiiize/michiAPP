@@ -5,7 +5,8 @@ let userLoggedContainer = document.querySelector('.headerContainer__login-logged
 let loginContainer = document.querySelector('.headerContainer__login');
 let userNameDisplay = document.querySelector('#userNameDisplay');
 let userPhotoDisplay = document.querySelector('#userPhoto');
-export default function hammburBtn ()  {
+let logoImg = document.querySelector('#logo');
+export  function hammburBtn ()  {
     headerBtn.onclick = () => { 
         //debugger
         headerBtn.classList.toggle("change");
@@ -38,5 +39,10 @@ export default function hammburBtn ()  {
                 }
             }           
         })
+    }
+}
+export   function Home () {
+    logoImg.onclick = () => {
+        window.location = './index.html';
     }
 }

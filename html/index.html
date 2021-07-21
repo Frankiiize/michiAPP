@@ -9,14 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <div class="container">
         <header class="headerContainer">
             <div class="headerContainer__icons">
                 <div class="headerContainer__icons-logo">
-                    <img src="assets/logo.png" alt="logo gatito">
+                    <img id="logo" src="../assets/logo.png" alt="logo gatito">
                 </div>
                 <div class="headerHamburger" id="hamburger">
                     <div class="bar1"></div>
@@ -48,8 +48,8 @@
             
             <div class="headerContainer__login-logged" id="userLogged" style="display: none;">
                 <div class="headerContainer__login-logged__user">
-                    <img width="50px" src="assets/userImg.png" alt="usuer photo" id="userPhoto">
-                    <a href="html/perfil.html" id="userNameDisplay">User Name</a>
+                    <img width="50px" src="../assets/userImg.png" alt="usuer photo" id="userPhoto">
+                    <a href="perfil.html" id="userNameDisplay">User Name</a>
                 </div>
                 <input type="button" class="headerContainer__login-sendBtn" value="Cerrar Sesion" name="" id="logoutBtn">
 
@@ -99,11 +99,11 @@
 
     <!-- Previously loaded Firebase SDKs -->
     <!-- iniciador firebase, configuracion -->
-    <script type="module" src="src/config.js"></script>
+    <script type="module" src="../src/config.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- <script src="sweetalert2.all.min.js"></script> -->
     <!-- my scripts -->
     <!-- <script src="src/dosis.js"></script> -->
-    <script type="module" src="src/index.js"></script>
+    <script type="module" src="../src/index.js"></script>
 </body>
 </html>

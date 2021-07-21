@@ -38,6 +38,11 @@ body {
             img {
                 width: 100%;
             }
+            img:hover{
+                cursor: pointer;
+                transform: scale(1.05);
+                transition: 200ms;
+            }
         }
 
     }

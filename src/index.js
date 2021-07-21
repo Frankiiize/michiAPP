@@ -1,4 +1,4 @@
-import hammburBtn from './hamburger.js'
+import {hammburBtn,Home} from './components/hamburger.js'
 //variables formulario login
 let headerBtn = document.querySelector('#hamburger');
 let loginForm = document.querySelector('#loginForm');
@@ -10,6 +10,7 @@ var provider = new firebase.auth.GoogleAuthProvider();
 let loginContainer = document.querySelector('.headerContainer__login');
 let userLoggedContainer = document.querySelector('.headerContainer__login-logged');
 let loginEmailBtn = document.querySelector('#loginBtn')
+
     
     //user logged
 let userNameDisplay = document.querySelector('#userNameDisplay');
@@ -227,11 +228,22 @@ function  loginWhitGoogle () {
         //debugger
         console.log('paso' + user.displayName);
         loginContainer.style.display = 'none';
+        userLoggedContainer.style.display = 'flex';
         Toast.fire({
             icon: 'success',
             title: `Bienvenido ${user.displayName}`
           })
-        
+          if(user){
+              //debugger
+              let cerrarVentana = () => {
+                  
+                  setTimeout(() =>{
+                      userLoggedContainer.style.display = 'none';
+                      headerBtn.classList = 'headerHamburger';
+                  },1500);
+            }
+            cerrarVentana();
+          }
         
         // ...
     }).catch((error) => {
@@ -268,6 +280,9 @@ function logout () {
                 icon: 'info',
                 title: 'Cierre de sesión exitoso'
               })
+              setTimeout(() => {
+                loginContainer.style.display = 'flex';
+              },500);
         }).catch((error) => {
             // An error happened.
             console.error(error);
@@ -432,9 +447,9 @@ function renderDocData (array) {
 let getDosisUsuario = () => {
     firebase.auth().onAuthStateChanged((userloged) => {
         const user = firebase.auth().currentUser;
-        const userEmail = user.email;
         
         if(user) {
+            const userEmail = user.email;
             //debugger
             //console.log(`usuario ${userEmail}`);
             db.collection('dosis')
@@ -466,9 +481,11 @@ let getDosisUsuario = () => {
 document.addEventListener("DOMContentLoaded",function() {
     form.addEventListener('submit', validadFormulario);
     googleBtn.addEventListener('click',loginWhitGoogle);
+   
     hammburBtn();
     validarLogin();
     logout();
+    Home();
   
     consultarEnRealTime();
     getDosisUsuario();

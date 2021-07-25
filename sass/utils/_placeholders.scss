@@ -96,4 +96,41 @@
     @extend %icon;
     background-image: url('../../assets/icons/medicamento.png');
 }
+
+                    /* temporal */
+.user-icon{
+    @extend %icon;
+    background-image: url('../../assets/icons/user.png');
+}
+.mascota-icon{
+    @extend %icon;
+    background-image: url('../../assets/icons/patita.png');
+}
+.fecha-icon {
+    @extend %icon;
+    background-image: url('../../assets/icons/calendario.png');
+}
+.dosis-icon {
+    @extend %icon;
+    background-image: url('../../assets/icons/medicamento.png');
+}
+                    /* temporal */
 //icons--------------
+
+
+//primary buttom
+%primaryBtn {
+    width: 80%;
+    height: 40px;
+    color: $primary-color-text;
+    background-color:$primary-text-color ;
+    border: none;
+    border-radius: 5px;
+}
+
+
+//acordion
+.active, .accordion:hover {
+    background-color: #ccc;
+  }
+//acordion

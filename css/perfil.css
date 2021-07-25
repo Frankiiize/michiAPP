@@ -69,27 +69,27 @@ html {
   cursor: pointer;
 }
 
-.formSection__form, .headerContainer__login form label {
+.headerContainer__login form label {
   width: 100%;
   border: 1px solid #CFD8DC;
   border-radius: 5px;
   margin: 5px 0;
 }
-.formSection__form input, .headerContainer__login form label input {
+.headerContainer__login form label input {
   width: 100%;
   height: 40px;
   border: none;
   border-radius: 4px;
   padding: 5px;
 }
-.formSection__form input::placeholder, .headerContainer__login form label input::placeholder {
+.headerContainer__login form label input::placeholder {
   color: #757575;
 }
-.formSection__form input:focus, .headerContainer__login form label input:focus {
+.headerContainer__login form label input:focus {
   outline: 1px solid #212121;
 }
 
-.dosis-icon, .fecha-icon, .mascota-icon, .user-icon, .dataSection__cardsContainer-dosis i, .dataSection__cardsContainer-fecha i, .dataSection__cardsContainer-mascota i, .dataSection__cardsContainer-user i {
+.dosis-icon, .fecha-icon, .mascota-icon, .user-icon {
   display: flex;
   width: 24px;
   height: 24px;
@@ -98,22 +98,6 @@ html {
   background-repeat: no-repeat;
   justify-self: flex-end;
   margin-right: 50px;
-}
-
-.dataSection__cardsContainer-user i {
-  background-image: url("../../assets/icons/user.png");
-}
-
-.dataSection__cardsContainer-mascota i {
-  background-image: url("../../assets/icons/patita.png");
-}
-
-.dataSection__cardsContainer-fecha i {
-  background-image: url("../../assets/icons/calendario.png");
-}
-
-.dataSection__cardsContainer-dosis i {
-  background-image: url("../../assets/icons/medicamento.png");
 }
 
 /* temporal */
@@ -134,7 +118,7 @@ html {
 }
 
 /* temporal */
-.formSection__form-sendBtn {
+.acordionBtn {
   width: 80%;
   height: 40px;
   color: #FFFFFF;
@@ -289,103 +273,174 @@ body {
   margin: 0 auto;
 }
 
-.formSection {
-  grid-column: 1/2;
-  grid-row: 3/4;
+.main {
   width: 100%;
 }
-.formSection__form {
-  box-shadow: 0 0 2px 0px;
-  border: none;
-  width: 80%;
-  max-width: 350px;
-  min-height: 150px;
+
+.userContainer {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-auto-rows: minmax(100px, 1fr);
+  margin: 10px auto;
+}
+.userContainer__img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: contain;
+}
+.userContainer__img img {
+  width: 100px;
+  border-radius: 50%;
+}
+.userContainer__info {
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  margin: 0 auto;
-  border-radius: 5px;
+  justify-content: space-around;
   align-items: center;
+  padding: 20px;
 }
-.formSection__form label {
+.userContainer__info span {
+  margin: 5px;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.acordContainer {
+  display: grid;
+  width: 80%;
+  grid-template-columns: minmax(100px, 1fr);
+  margin: 0 auto;
+}
+.acordContainer__btn {
+  width: 100%;
+}
+
+.acordionBtn {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.petCards {
+  width: 100%;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+  overflow: hidden;
+}
+.petCards__card {
+  width: 100%;
+  height: 100px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  border-radius: 13px;
+  background-color: #B7E5FF;
+  margin: 20px auto;
+}
+.petCards__card-img {
   display: flex;
   width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.petCards__card-img img {
+  width: 40px;
   height: 40px;
-  justify-content: flex-start;
-  margin-bottom: 20px;
-  align-items: center;
+  object-fit: contain;
+  border-radius: 50%;
 }
-.formSection__form label span {
-  width: 20%;
-  font-size: 1.6rem;
+.petCards__card-img span {
+  font-size: 1.2rem;
+  padding: 2px;
+  margin: 2px 5px;
+}
+.petCards__card-description {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+.petCards__card-description__edad, .petCards__card-description__peso, .petCards__card-description__chip {
+  font-size: 1.2rem;
   color: #212121;
-  padding: 5px;
-  margin-right: 15px;
 }
-.formSection__form label input[type=checkbox] {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  position: relative;
-  left: 0;
-}
-.formSection__form label input[type=date] {
-  width: 100%;
-}
-.formSection__form-sendBtn:hover {
-  cursor: pointer;
+.petCards__card-description__edad span:nth-child(1), .petCards__card-description__peso span:nth-child(1), .petCards__card-description__chip span:nth-child(1) {
+  font-weight: 700;
 }
 
-.dataSection {
-  display: grid;
-  margin: 50px auto;
-  width: 90%;
-  max-width: 1440px;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  grid-auto-rows: 150px;
-  gap: 20px;
-}
-.dataSection__cardsContainer {
-  display: grid;
-  grid-template-columns: minmax(200px, 1fr);
-  border: 1px solid #ebebeb;
-  background-color: #CFD8DC;
-}
-.dataSection__cardsContainer-user {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
-  align-items: center;
-  justify-content: center;
+.dosisCards {
   width: 100%;
-  margin: 0 auto;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+  overflow: hidden;
 }
-.dataSection__cardsContainer-mascota {
+.dosisCards__card {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 0 auto;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 50px;
+  background-color: #C5B7FF;
+  border-radius: 13px;
+  margin: 10px auto;
 }
-.dataSection__cardsContainer-fecha {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
+.dosisCards__card-user, .dosisCards__card-mascota, .dosisCards__card-med, .dosisCards__card-date {
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 0 auto;
 }
-.dataSection__cardsContainer-dosis {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 1fr;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 0 auto;
+.dosisCards__card-user span, .dosisCards__card-mascota span, .dosisCards__card-med span, .dosisCards__card-date span {
+  color: #212121;
+  font-size: 1.2rem;
+}
+.dosisCards__card-user i, .dosisCards__card-mascota i, .dosisCards__card-med i, .dosisCards__card-date i {
+  margin-left: 2px;
 }
 
-/*# sourceMappingURL=styles.css.map */
+.medCards {
+  width: 100%;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+  overflow: hidden;
+}
+.medCards__card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 50px);
+  margin-bottom: 10px;
+  background-color: #FCFF7E;
+  border-radius: 13px;
+  margin: 10px auto;
+}
+.medCards__card-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.medCards__card-title i {
+  margin-right: 5px;
+}
+.medCards__card-title span {
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+.medCards__card-table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.medCards__card-table__nombre, .medCards__card-table__dosis, .medCards__card-table__administracion {
+  display: flex;
+  flex-direction: column;
+}
+.medCards__card-table__nombre span:nth-child(1), .medCards__card-table__dosis span:nth-child(1), .medCards__card-table__administracion span:nth-child(1) {
+  font-weight: 700;
+}
+.medCards__card-table__nombre span, .medCards__card-table__dosis span, .medCards__card-table__administracion span {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 2px;
+}
+
+/*# sourceMappingURL=perfil.css.map */

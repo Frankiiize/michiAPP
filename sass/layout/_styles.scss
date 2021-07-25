@@ -12,139 +12,7 @@ body {
     justify-items: center;
     margin: 0 auto;
 }
-.headerContainer {
-    grid-column: 1 / 2;
-    width: 100%;
-    height: 80px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    background-color: $primary-color-light;
-    &__icons {
-        width: 80%;
-        height: 80px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-direction: row;
-        &-logo {
-            width: 70px;
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            img {
-                width: 100%;
-            }
-            img:hover{
-                cursor: pointer;
-                transform: scale(1.05);
-                transition: 200ms;
-            }
-        }
 
-    }
-    &__login {
-        width: 80%;
-        max-width: 300px;
-        min-height: 110px;
-        //display: none;
-        flex-direction: column;
-        justify-content: space-around;
-        position: absolute;
-        background-color: $primary-color;
-        border-radius: 5px;
-        padding: 10px;
-        margin-right: 10px;
-        top: 80px;
-        right: 0;
-        z-index: $zIndex_LoginContainer;
-        form{
-            width: 100%;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            label{
-                @extend %form
-                
-            }
-        }
-        
-       &-sendBtn {
-        width: 70%;
-        height: 40px;
-        color: $primary-color-text;
-        background-color:$primary-text-color ;
-        border: none;
-        border-radius: 5px;
-        margin: 10px;
-        align-self: center;
-       }
-       &-sendBtn:hover{
-           cursor: pointer;
-           background-color: $primary-color-light;
-           transition: 700ms;
-       }
-       &-rsLogin{
-           width: 100%;
-           margin-top: 10px;
-           display: inline-flex;
-           align-items: center;
-           span {
-               color: $primary-color-light;
-               font-size: $ff-small;
-           }
-           i {
-               margin-left: 15px;
-           }
-           i:hover{
-               cursor: pointer;
-               transform: scale(1.1);
-               transition: 200ms;
-           }
-       }
-       &-logged {
-        width: 50%;
-        max-width: 300px;
-        min-height: 110px;
-        //display: none;
-        flex-direction: column;
-        justify-content: space-around;
-        position: absolute;
-        background-color: #607D8B;
-        border-radius: 5px;
-        padding: 10px;
-        margin-right: 10px;
-        top: 80px;
-        right: 0;
-        z-index: $zIndex_LoginContainer;
-           &__user{
-               display: flex;
-               flex-direction: row;
-               align-items: center;
-               justify-content: flex-end;
-               margin: 10px;
-           }
-           img {
-               width: 50px;
-               border-radius: 50%;
-           }
-           span, a {
-               margin-left: 10px;
-               color: $primary-color-light;
-               font-size: $ff-normal;
-               text-decoration: none;
-           }
-
-           
-       }
-          
-    }
-    
-}
 .formSection {
     grid-column: 1 / 2;
     grid-row: 3 / 4;
@@ -189,12 +57,7 @@ body {
             }
         }
         &-sendBtn {
-            width: 80%;
-            height: 40px;
-            color: $primary-color-text;
-            background-color:$primary-text-color ;
-            border: none;
-            border-radius: 5px;
+           @extend %primaryBtn;
         }
         &-sendBtn:hover {
             cursor: pointer;
@@ -268,9 +131,4 @@ body {
     }
 }
 
-
-.headerHamburger {
-    display: inline-block;
-    cursor: pointer;
-  }
   

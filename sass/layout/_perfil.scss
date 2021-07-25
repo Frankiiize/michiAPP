@@ -1,0 +1,192 @@
+body {
+    background-color: $divider-color;
+    font-family: $ff-primary;
+}
+.container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(1, minmax(200px, 1fr));
+   // grid-template-rows:  minmax(150px, auto);
+    grid-template-rows: auto;
+    row-gap: 20px;
+    justify-items: center;
+    margin: 0 auto;
+}
+.main {
+    width: 100%;
+
+}
+.userContainer {
+    
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(100px, 1fr);
+    margin: 10px auto;
+    &__img {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        object-fit: contain;
+        img {
+            width: 100px;
+            //height: 150px;
+            border-radius: 50%;
+        }
+    }
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content:space-around;
+        align-items: center;
+        padding: 20px;
+        span {
+            margin: 5px;
+            font-size: $ff-normal;
+            font-weight: 700;
+        }
+    }
+}
+
+.acordContainer {
+    display: grid;
+    width: 80%;
+    grid-template-columns: minmax(100px, 1fr);
+    margin: 0 auto;
+    
+    &__btn {
+        width: 100%;
+    }
+}
+.acordionBtn {
+    @extend %primaryBtn;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.petCards {
+    width: 100%;
+    //display: none;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    overflow: hidden;
+    &__card {
+        width: 100%;
+        height: 100px;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: 1fr;
+        border-radius: 13px;
+        background-color: #B7E5FF;
+        margin: 20px auto;
+        &-img {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+          img {
+              width: 40px;
+              height: 40px;
+              object-fit: contain;
+              border-radius: 50%;
+          }
+          span{
+              font-size: $ff-small;
+              padding: 2px;
+              margin: 2px 5px;
+          }
+        }
+        &-description {
+           display: flex;
+           width: 100%;
+           flex-direction: column;
+           align-items: flex-start;
+           justify-content: space-evenly;
+           &__edad, &__peso, &__chip {
+              font-size: $ff-small;
+              color: $primary-text-color;
+              span:nth-child(1) {
+                  font-weight: 700;
+              }
+             
+           }
+        }
+    }
+
+}
+.dosisCards {
+    width: 100%;
+    //display: none;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    overflow: hidden;
+    &__card {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-auto-rows: 50px;
+        background-color: #C5B7FF;
+        border-radius: 13px;
+        margin: 10px auto;
+        &-user ,&-mascota, &-med, &-date {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+       
+            span {
+                color: $primary-text-color;
+                font-size: $ff-small;
+            }
+            i {
+                margin-left: 2px;
+            }
+            
+        }
+      
+    }
+
+}
+.medCards {
+    width: 100%;
+    //display: none;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    overflow: hidden;
+    &__card{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2,50px);
+        margin-bottom: 10px;
+        background-color: #FCFF7E;
+        border-radius: 13px;
+        margin: 10px auto;
+        &-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i {
+                margin-right: 5px;
+            }
+            span{
+                font-weight: 700;
+                font-size: $ff-normal;
+            }
+        }
+        &-table {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            &__nombre, &__dosis, &__administracion {
+                display: flex;
+                flex-direction: column;
+                span:nth-child(1){
+                    font-weight: 700;
+                }
+                span{
+                    text-align: center;
+                    font-size: $ff-small;
+                    padding: 2px;
+                }
+            }
+        }
+    }
+}

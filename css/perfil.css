@@ -118,7 +118,7 @@ html {
 }
 
 /* temporal */
-.acordionBtn {
+.acordionBtn button, .acordionBtn {
   width: 80%;
   height: 40px;
   color: #FFFFFF;
@@ -127,10 +127,16 @@ html {
   border-radius: 5px;
 }
 
-.active, .accordion:hover {
-  background-color: #ccc;
+.active {
+  background-color: #757575;
 }
 
+@media (min-width: 700px) {
+  .acordionBtn:hover {
+    background-color: #757575;
+    cursor: pointer;
+  }
+}
 .headerContainer {
   grid-column: 1/2;
   width: 100%;
@@ -315,12 +321,23 @@ body {
   margin: 0 auto;
 }
 .acordContainer__btn {
-  width: 100%;
+  width: 70%;
 }
 
 .acordionBtn {
   width: 100%;
+  display: grid;
+  grid-template-columns: 5fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  align-items: center;
   margin-bottom: 20px;
+}
+.acordionBtn button {
+  background-color: transparent;
+}
+.acordionBtn p {
+  font-size: 2rem;
 }
 
 .petCards {
@@ -386,16 +403,20 @@ body {
   margin: 10px auto;
 }
 .dosisCards__card-user, .dosisCards__card-mascota, .dosisCards__card-med, .dosisCards__card-date {
+  width: 80%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
+  justify-self: center;
 }
 .dosisCards__card-user span, .dosisCards__card-mascota span, .dosisCards__card-med span, .dosisCards__card-date span {
+  width: 80%;
+  margin-left: 10px;
   color: #212121;
   font-size: 1.2rem;
 }
 .dosisCards__card-user i, .dosisCards__card-mascota i, .dosisCards__card-med i, .dosisCards__card-date i {
-  margin-left: 2px;
+  margin: 0;
 }
 
 .medCards {

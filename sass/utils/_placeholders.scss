@@ -130,7 +130,14 @@
 
 
 //acordion
-.active, .accordion:hover {
-    background-color: #ccc;
+.active {
+    background-color: $secondary-text-color;
   }
 //acordion
+@media (min-width: 700px) {
+    .acordionBtn:hover {
+        background-color: $secondary-text-color;
+        cursor: pointer;
+    }
+
+ }

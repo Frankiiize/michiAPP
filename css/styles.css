@@ -143,10 +143,16 @@ html {
   border-radius: 5px;
 }
 
-.active, .accordion:hover {
-  background-color: #ccc;
+.active {
+  background-color: #757575;
 }
 
+@media (min-width: 700px) {
+  .acordionBtn:hover {
+    background-color: #757575;
+    cursor: pointer;
+  }
+}
 .headerContainer {
   grid-column: 1/2;
   width: 100%;

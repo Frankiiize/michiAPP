@@ -56,13 +56,26 @@ body {
     margin: 0 auto;
     
     &__btn {
-        width: 100%;
+        width: 70%;
     }
 }
 .acordionBtn {
     @extend %primaryBtn;
     width: 100%;
+    display: grid;
+    grid-template-columns: 5fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
     margin-bottom: 20px;
+    button{
+        @extend %primaryBtn;
+        background-color: transparent;
+    }
+    p{
+        font-size: $ff-big;
+    }
+
 }
 .petCards {
     width: 100%;
@@ -128,16 +141,20 @@ body {
         border-radius: 13px;
         margin: 10px auto;
         &-user ,&-mascota, &-med, &-date {
+            width: 80%;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-around;
             align-items: center;
-       
+            justify-self: center;
             span {
+                width: 80%;
+                margin-left: 10px;
                 color: $primary-text-color;
                 font-size: $ff-small;
             }
             i {
-                margin-left: 2px;
+                
+                margin: 0;
             }
             
         }

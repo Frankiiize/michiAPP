@@ -89,7 +89,7 @@ html {
   outline: 1px solid #212121;
 }
 
-.dosis-icon, .fecha-icon, .mascota-icon, .user-icon, .dataSection__cardsContainer-dosis i, .dataSection__cardsContainer-fecha i, .dataSection__cardsContainer-mascota i, .dataSection__cardsContainer-user i {
+.close-icon, .dosis-icon, .fecha-icon, .mascota-icon, .user-icon, .dataSection__cardsContainer-dosis i, .dataSection__cardsContainer-fecha i, .dataSection__cardsContainer-mascota i, .dataSection__cardsContainer-user i {
   display: flex;
   width: 24px;
   height: 24px;
@@ -131,6 +131,11 @@ html {
 
 .dosis-icon {
   background-image: url("../../assets/icons/medicamento.png");
+}
+
+.close-icon {
+  background-image: url("../../assets/icons/window-close-regular.svg");
+  filter: invert(0.2);
 }
 
 /* temporal */

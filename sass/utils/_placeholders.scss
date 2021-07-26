@@ -65,8 +65,8 @@
     }
     input:focus{
         outline: 1px solid $primary-text-color;
-
     }
+    
 }
 //froms-------------
 //--iconos---//
@@ -113,6 +113,11 @@
 .dosis-icon {
     @extend %icon;
     background-image: url('../../assets/icons/medicamento.png');
+}
+.close-icon{
+    @extend %icon;
+    background-image: url('../../assets/icons/window-close-regular.svg');
+    filter: invert(0.2);
 }
                     /* temporal */
 //icons--------------

@@ -55,9 +55,7 @@ body {
     grid-template-columns: minmax(100px, 1fr);
     margin: 0 auto;
     
-    &__btn {
-        width: 70%;
-    }
+    
 }
 .acordionBtn {
     @extend %primaryBtn;
@@ -71,6 +69,7 @@ body {
     button{
         @extend %primaryBtn;
         background-color: transparent;
+        width: 100%;
     }
     p{
         font-size: $ff-big;
@@ -133,19 +132,28 @@ body {
     max-height: 0;
     transition: max-height 0.2s ease-out;
     overflow: hidden;
+    position: relative;
     &__card {
         display: grid;
         grid-template-columns: repeat(2,1fr);
         grid-auto-rows: 50px;
         background-color: #C5B7FF;
         border-radius: 13px;
+        padding: 10px;
         margin: 10px auto;
-        &-user ,&-mascota, &-med, &-date {
-            width: 80%;
+      
+        &-user ,&-mascota, &-date, &-med {
+            width: 100%;
             display: flex;
-            justify-content: space-around;
+            justify-content: flex-start;
             align-items: center;
             justify-self: center;
+            &__text{
+                width: 90%;
+                display: flex;
+                flex-direction: column;
+                
+            }
             span {
                 width: 80%;
                 margin-left: 10px;
@@ -153,7 +161,6 @@ body {
                 font-size: $ff-small;
             }
             i {
-                
                 margin: 0;
             }
             
@@ -206,4 +213,67 @@ body {
             }
         }
     }
+}
+.modalDosis {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    background-color: #ebebebad;
+    align-items: center;
+    justify-content: center;
+    &__close{
+        display: flex;
+        width: 80%;
+        justify-content: flex-end;
+        margin-bottom: 10px;
+        i {
+            margin: 0;
+        }
+    }
+    &__form {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: 50px;
+        width: 80%;
+        color: $primary-color-light;
+        background-color: $primary-text-color;
+        padding: 10px;
+        border-radius: 13px;
+        box-shadow:1px 0px 5px 2px #292828;
+        label {
+            display: grid;
+            grid-template-columns: 1fr 4fr;
+            gap: 5px;
+            align-items: center;
+            width: 100%;
+            
+        }
+        input{
+        width: 100%;
+        height: 40px;
+        border:none;
+        border-radius: 4px;
+        padding: 5px;
+        }
+        span{
+            font-size: $ff-normal;
+        }
+        input[type=checkbox] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            position: relative;
+            left: 0;
+            
+        }
+
+        
+    }
+}
+.modalDosisDelete {
+    @extend .modalDosis;
 }

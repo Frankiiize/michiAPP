@@ -67,11 +67,10 @@
 
             <div class="userContainer">
                 <div class="userContainer__img">
-                    <img src="../assets/userImg.png" alt="">
+                    
                 </div>
                 <div class="userContainer__info">
-                    <span>userDisplayName</span>
-                    <span>userDisplayLastName</span>
+                    <span id="userName"></span>
                 </div>
             </div>
 
@@ -128,8 +127,8 @@
 
                 <div class="acordionBtn">
                     <button class="displayBtn" >Dosis</button>
-                    <p class="plus">+</p>
-                    <p>-</p>
+                    <p class="plus" id="addDosis">+</p>
+                    <p id="deleteDosis">-</p>
                 </div>
                     
                 <div class="dosisCards">
@@ -189,6 +188,45 @@
 
 
             </div>
+            
+            <div style="display: none;" class="modalDosis">
+                <div class="modalDosis__close">
+                    <i class="close-icon closIconDosisModal" ></i>
+                </div>
+                <form action="" method="post" id="form" class="modalDosis__form">
+                    <label for="name">
+                        <span>Mascota</span>
+                        <input type="text" name="name" id="name">
+                    </label>
+                    <label for="check1">
+                        <span>dia</span>
+                        <input type="checkbox" name="tarde" id="dia" value="dia"> 
+                    </label>
+                    <label for="check2">
+                        <span>noche</span> 
+                        <input type="checkbox" name="noche" id="noche" value="noche"> 
+                    </label>
+                    <label for="medicamento" >
+                        <span>Medicamento</span>
+                        <input type="text" name="medicamento" id="medicamento">
+                    </label>
+                    <input class="formSection__form-sendBtn" type="submit" value="Enviar">
+                </form>
+            </div>
+            <div style="display: none;" class="modalDosisDelete">
+                <div class="modalDosis__close">
+                    <i class="close-icon closIconDosisModal"></i>
+                </div>
+                <form id="elimarDosisForm" class="modalDosis__form" action="">
+                    <label for="eliminar">
+                        <span>Id Dosis</span>
+                        <input type="text" name="eliminar" id="eliminarDoc">
+                    </label>
+                    <input type="submit" id="eliminar" value="Eliminar">
+                </form>          
+
+            </div>
+
         </main>
         
 

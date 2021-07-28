@@ -136,19 +136,16 @@ function closeModalBtn (contenedor) {
     }
 }
 function showDeleteModal() {
-    deleteDosis.onclick = (ev) => {
-        ev.stopPropagation();
+
         if(deleteModalDosis.style.display = 'none'){
             deleteModalDosis.style.display = 'flex'
             closeModalBtn(deleteModalDosis);
         } else {
             deleteModalDosis.style.display = 'none';
         }
-    }
+    
 }
-function showModal() {
-    addDosisPlus.onclick = (ev) => {
-        ev.stopPropagation();
+function showModalDosis(plus) {
         if(modalDosis.style.display == 'none'){
             modalDosis.style.display = 'flex'
            // debugger
@@ -156,26 +153,15 @@ function showModal() {
         } else {
             modalDosis.style.display = 'none';
         }
-    }
+    
 }
-function showAcc () {
-    for(let i = 0; i < accBtn.length ; i++){
-        accBtn[i].addEventListener('click', (ev) => {
-          
-            ev.stopPropagation();
-            //console.log(ev)
-            //debugger
-            //accBtn[i].classList.toggle("active")
-            accBtn[i].classList.toggle('active');
-         
-            let card = accBtn[i].nextElementSibling;
-            //console.log(card.style.maxHeight);
-            if(card.style.maxHeight){
-                card.style.maxHeight = null;
-            } else {
-                card.style.maxHeight = card.scrollHeight + 'px';
-            }
-        })
+function showAcc (btn) {
+    btn.classList.toggle('active');
+    let card = btn.nextElementSibling;
+    if(card.style.maxHeight){
+        card.style.maxHeight = null;
+    } else {
+        card.style.maxHeight = card.scrollHeight + 'px';
     }
 }
 let getDosisUsuario = () => {
@@ -307,18 +293,48 @@ function renderUserData () {
         }
     })
 }
-
+function acordion() {
+    for(let btn of accBtn){
+        
+        btn.addEventListener('click', (event) => {
+            if(event.target.classList[0] == "displayBtn"){
+                showAcc(btn);
+            } else if(event.target.classList[0] == "plus"){           
+                if(btn.nextElementSibling.classList[0] == "dosisCards" ){
+                    showModalDosis();            
+                }else {
+                    console.log(event.target)
+                    
+                }
+               
+            } else if(event.target.classList[0] == "deleteMenos"){
+                if(btn.nextElementSibling.classList[0] == "dosisCards" ){           
+                    showDeleteModal()
+                }
+            } 
+            else {
+                console.log(event.target)
+            }
+            
+        })
+    }
+}
 document.addEventListener("DOMContentLoaded",function() {
     form.addEventListener('submit', validadFormulario);
     elimarDosisForm.addEventListener('submit', eliminarDosis);
     Home();
     hammburBtn();
     logout();
-    showAcc();
+    //showAcc();
     getDosisUsuario();
-    showModal();
-    showDeleteModal();
+    //showModal();
+    //showDeleteModal();
     renderUserData ();
+    acordion();
+    //console.log(accBtn);
+    
+    
+
    /*  let plus = document.querySelectorAll('.plus');
     for(let i = 0; i < plus.length; i++){
         plus[i].addEventListener('click', (ev) => {

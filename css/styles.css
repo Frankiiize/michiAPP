@@ -70,10 +70,22 @@ html {
 }
 
 .formSection__form, .headerContainer__login form label {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 50px;
+  width: 80%;
+  color: #CFD8DC;
+  background-color: #212121;
+  padding: 10px;
+  border-radius: 13px;
+  box-shadow: 1px 0px 5px 2px #292828;
+}
+.formSection__form label, .headerContainer__login form label label {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 5px;
+  align-items: center;
   width: 100%;
-  border: 1px solid #CFD8DC;
-  border-radius: 5px;
-  margin: 5px 0;
 }
 .formSection__form input, .headerContainer__login form label input {
   width: 100%;
@@ -82,11 +94,16 @@ html {
   border-radius: 4px;
   padding: 5px;
 }
-.formSection__form input::placeholder, .headerContainer__login form label input::placeholder {
-  color: #757575;
+.formSection__form span, .headerContainer__login form label span {
+  font-size: 1.6rem;
+  text-align: right;
 }
-.formSection__form input:focus, .headerContainer__login form label input:focus {
-  outline: 1px solid #212121;
+.formSection__form input[type=checkbox], .headerContainer__login form label input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  left: 0;
 }
 
 .close-icon, .dosis-icon, .fecha-icon, .mascota-icon, .user-icon, .dataSection__cardsContainer-dosis i, .dataSection__cardsContainer-fecha i, .dataSection__cardsContainer-mascota i, .dataSection__cardsContainer-user i {
@@ -150,6 +167,18 @@ html {
 
 .active {
   background-color: #757575;
+}
+
+.fullProgres {
+  width: 100%;
+  background-color: #ebebeb;
+  transition: 400ms;
+}
+
+.progesBar {
+  width: 0%;
+  height: 20px;
+  background-color: #ebebeb;
 }
 
 @media (min-width: 700px) {
@@ -329,7 +358,7 @@ body {
 .formSection__form label span {
   width: 20%;
   font-size: 1.6rem;
-  color: #212121;
+  color: #CFD8DC;
   padding: 5px;
   margin-right: 15px;
 }

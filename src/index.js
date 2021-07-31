@@ -160,7 +160,7 @@ let consultarEnRealTime = () => {
 }
 
 function renderRealtime (userName, mascota, fecha, dosis) {
-   // debugger
+    debugger
     let divCards = document.createElement('div');
     divCards.classList = 'dataSection__cardsContainer';
 

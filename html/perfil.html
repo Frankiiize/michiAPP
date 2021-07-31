@@ -83,7 +83,7 @@
                     <p class="deleteMenos">-</p>
                 </div>
                 <div  class="petCards">
-                    <div class="petCards__card">
+                    <!-- <div class="petCards__card">
                         <div class="petCards__card-img">
                             <img src="../assets/cat-solid.svg" alt="">
                             <span>mascotaName</span>
@@ -122,7 +122,7 @@
                                 <span>1234567abcdfg</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="acordionBtn">
@@ -227,6 +227,55 @@
 
             </div>
 
+            <div style="display: none;" class="ModalMascota">
+                <div class="modalDosis__close">
+                    <i class="close-icon closIconDosisModal" ></i>
+                </div>
+                <form class="ModalMascota__form" method="POST" id="formMascota" >
+                    <label for="mascota">
+                        <span>Nombre</span>
+                        <input type="text" placeholder="mascota" id="mascota">
+                    </label>
+                    <label for="chip">
+                        <span>Chip N°</span>
+                        <input type="text" placeholder="000-000" id="chip">
+                    </label>
+                    <label for="peso">
+                        <span>Peso</span>
+                        <input type="number" placeholder="Kg" id="peso">
+                    </label>
+                    <label for="edad">
+                        <span>Peso</span>
+                        <input type="number" placeholder="Edad" id="edad">
+                    </label>
+                    <label for="checkM">
+                        <span>M</span>
+                        <input type="checkbox" name="" id="checkM" value="masculino">
+                    </label>
+                    <label for="checkF">
+                        <span>F</span>
+                        <input type="checkbox" name="" id="checkF" value="femenino">
+                    </label>
+                    <label for="veterinario">
+                        <span>veterinario</span>
+                        <input type="text" placeholder="Veterinario" id="veterinario"> 
+                    </label>
+                    <label for="controlVet">
+                        <span>Ultimo Control</span>
+                        <input type="date" name="controlVet" id="controlVet">
+                    </label>
+                    <label class="ModalMascota__form-foto" for="photo">
+                        <span>Foto</span>
+                        <div class="ModalMascota__form-upLoad">
+                            <input type="file" name="" id="photo" >
+
+                            <div style="display: none;" class="progesBar"></div>
+                        </div>
+                    </label>
+                    <input class="ModalMascota__form-sendBtn" type="submit" value="Enviar">
+                </form>
+            </div>
+
         </main>
         
 
@@ -245,6 +294,8 @@
     <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+    
 
     <!-- Previously loaded Firebase SDKs -->
     <!-- iniciador firebase, configuracion -->

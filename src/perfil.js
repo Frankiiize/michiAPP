@@ -12,6 +12,7 @@ let dosisMount = document.querySelector('.dosisCards');
 let mascotaMount = document.querySelector('.petCards');
 let dosisData = []
 let mascotaData = [];
+let selecMascotaOptions = document.querySelector('#mascotas')
 class dosisContructor {
     constructor(docId, userName, mascota, dosis,serverDate, medicamento){
         
@@ -54,7 +55,7 @@ let formMascota = document.querySelector('#formMascota');
 let nameMascota = document.querySelector('#mascota');
 let chipMascota = document.querySelector('#chip');
 let pesoMascota = document.querySelector('#peso');
-let edadMascota = document.querySelector('#edad')
+let edadMascota = document.querySelector('#edad')//
 let maleMascota = document.querySelector('#checkM');
 let femMascota = document.querySelector('#checkF');
 let vetmascota = document.querySelector('#veterinario');
@@ -69,16 +70,19 @@ let userNameSpan = document.querySelector('#userName');
 
 function validadFormulario (ev) {
     ev.preventDefault();
+    //selectOption (); 
+    console.log(selectOption())
+    let mascotaName = selectOption();
     let user = firebase.auth().currentUser;  
     let ischeck1 = checkD.checked;
     let ischeck2 = checkN.checked;
 //debugger
     if (user != null){
-        if(ischeck1 ^ ischeck2 && name.value != '' && medicamento.value !=''){
+        if(ischeck1 ^ ischeck2 && mascotaName != '' && medicamento.value !=''){
             if(ischeck1){
                 db.collection("dosis").add({
                     user: user.displayName,
-                    mascota: name.value,
+                    mascota: mascotaName,
                     dosisTurno: checkD.value,
                     medicamento: medicamento.value,
                     userEmail: user.email,
@@ -90,7 +94,7 @@ function validadFormulario (ev) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Registro enviado',
-                        text: `${name.value} tomo su docis del ${checkD.value}`,
+                        text: `${mascotaName} tomo su docis del ${checkD.value}`,
                         buttonsStyling: false,                                            
                       })
                       modalDosis.style.display = 'none';
@@ -101,7 +105,7 @@ function validadFormulario (ev) {
             } else {
                 db.collection("dosis").add({
                     user: user.displayName,
-                    mascota: name.value,
+                    mascota: mascotaName,
                     dosisTurno: checkN.value,
                     medicamento: medicamento.value,
                     serverDate: firebase.firestore.FieldValue.serverTimestamp()
@@ -111,7 +115,7 @@ function validadFormulario (ev) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Registro enviado',
-                        text: `${name.value} tomo su docis de la ${checkN.value}`,
+                        text: `${mascotaName} tomo su docis de la ${checkN.value}`,
                         buttonsStyling: false,                      
                       })
                       modalDosis.style.display = 'none';
@@ -184,6 +188,7 @@ async function upLoadPetPhoto () {
 }
 async function validarFormMascota (ev){
     ev.preventDefault();
+    
     let user = firebase.auth().currentUser;
     let check1 = maleMascota.checked;
     let check2 = femMascota.checked; 
@@ -348,7 +353,12 @@ function showAcc (btn) {
 function renderMascotaCard (array) {
     for(let item of array){
         let cardContainer = document.createElement('div');
+        let opcion = document.createElement('option')
         cardContainer.classList.add('petCards__card');
+        console.log(opcion)
+        opcion.value = `${item.name}`;
+        opcion.append(`${item.name}`)
+        selecMascotaOptions.append(opcion)
         if(item.foto === '../assets/icons/patita.png'){
             cardContainer.innerHTML = `<div class="petCards__card-img">
                                         <img style="
@@ -397,6 +407,10 @@ function renderMascotaCard (array) {
 
     }
 } 
+function selectOption () {
+    console.log(selecMascotaOptions.value)
+    return selecMascotaOptions.value;
+}
 let getMascotas = () => {
     firebase.auth().onAuthStateChanged((userloged) => {
         const user = firebase.auth().currentUser; 
@@ -408,17 +422,17 @@ let getMascotas = () => {
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) =>{
-                    console.log(doc.id, " => ", doc.data());
+                    //console.log(doc.id, " => ", doc.data());
                     let name = doc.data().mascota;
                     let edad = doc.data().edad;
                     let peso = doc.data().peso;
                     let chip = doc.data().chip;
                     let foto = doc.data().foto;
-                    console.log(`${name} ${edad} ${peso} ${chip} ${foto}`)
+                    //console.log(`${name} ${edad} ${peso} ${chip} ${foto}`)
                     mascotaData.push(new mascotaCardConstructor(name,edad,peso,chip,foto));
 
                 })
-                console.log(mascotaData);
+               // console.log(mascotaData);
                 renderMascotaCard(mascotaData); 
             })
         }
@@ -460,7 +474,7 @@ let getDosisUsuario = () => {
     })
 }
 const getDosisRealTime = () => {
-    //debugger
+    debugger
     return new Promise ((resolve,reject) => {
         firebase.auth().onAuthStateChanged((userloged) => {
             if(userloged){
@@ -494,6 +508,7 @@ const getDosisRealTime = () => {
 }
 getDosisRealTime()
 .then((data)=>{
+    debugger
 console.log(data)
     let docId = data.userId;
     let userName =  data.user; 
@@ -694,6 +709,7 @@ document.addEventListener("DOMContentLoaded",function() {
     formDosis.addEventListener('submit', validadFormulario);
     formMascota.addEventListener('submit', validarFormMascota);
     elimarDosisForm.addEventListener('submit', eliminarDosis);
+    selecMascotaOptions.addEventListener('change', selectOption)
     Home();
     hammburBtn();
     logout();

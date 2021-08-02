@@ -196,7 +196,7 @@
                 <form action="" method="post" id="form" class="modalDosis__form">
                     <label for="mascotas">
                         <span>Mascota</span>
-                        <select id="mascotas">
+                        <select class="mascotas" id="mascotas">
                         </select>
                     </label>
                     <label for="check1">
@@ -275,6 +275,33 @@
                     </label>
                     <input class="ModalMascota__form-sendBtn" type="submit" value="Enviar">
                 </form>
+            </div>
+            
+            <div class="modalMed">
+                <div class="modalDosis__close">
+                    <i class="close-icon closIconDosisModal" ></i>
+                </div>
+                <form class="ModalMed_form" action="" method="POST" id="formMed">
+                    <label for="medName">
+                        <span>Medicina</span>
+                        <input type="text" name="" id="medName">
+                    </label>
+                    <label for="mascotas">
+                        <span>Mascota</span>
+                        <select class="mascotas" id="mascotas">
+                          
+                        </select>
+                    </label>
+                    <label for="dosis">
+                        <span>dosis</span>
+                        <input type="text" id="dosis">
+                    </label>
+                    <label for="administracion">
+                        <span>Administracion</span>
+                        <input type="text">
+                    </label>
+                </form>
+
             </div>
 
         </main>

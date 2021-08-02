@@ -350,63 +350,7 @@ function showAcc (btn) {
         card.style.maxHeight = card.scrollHeight + 'px';
     }
 }
-function renderMascotaCard (array) {
-    for(let item of array){
-        let cardContainer = document.createElement('div');
-        let opcion = document.createElement('option')
-        cardContainer.classList.add('petCards__card');
-        console.log(opcion)
-        opcion.value = `${item.name}`;
-        opcion.append(`${item.name}`)
-        selecMascotaOptions.append(opcion)
-        if(item.foto === '../assets/icons/patita.png'){
-            cardContainer.innerHTML = `<div class="petCards__card-img">
-                                        <img style="
-                                        width: 24px;
-                                        height: 24px;
-                                    " src="${item.foto}" alt="">
-                                        <span>${item.name}</span>
-                                    </div>
-                                    <div class="petCards__card-description">
-                                        <div class="petCards__card-description__edad">
-                                            <span>Edad:</span>
-                                            <span>${item.edad}</span>
-                                        </div>
-                                        <div class="petCards__card-description__peso">
-                                            <span>Peso:</span>
-                                            <span>${item.peso}</span>
-                                        </div>
-                                        <div class="petCards__card-description__chip">
-                                            <span>Chip:</span>
-                                            <span>${item.chip}</span>
-                                        </div>
-                                    </div>`;
-            mascotaMount.append(cardContainer);
-        }else {
 
-            cardContainer.innerHTML = `<div class="petCards__card-img">
-                                        <img src="${item.foto}" alt="">
-                                        <span>${item.name}</span>
-                                    </div>
-                                    <div class="petCards__card-description">
-                                        <div class="petCards__card-description__edad">
-                                            <span>Edad:</span>
-                                            <span>${item.edad}</span>
-                                        </div>
-                                        <div class="petCards__card-description__peso">
-                                            <span>Peso:</span>
-                                            <span>${item.peso}</span>
-                                        </div>
-                                        <div class="petCards__card-description__chip">
-                                            <span>Chip:</span>
-                                            <span>${item.chip}</span>
-                                        </div>
-                                    </div>`;
-            mascotaMount.append(cardContainer);
-        }
-
-    }
-} 
 function selectOption () {
     console.log(selecMascotaOptions.value)
     return selecMascotaOptions.value;
@@ -474,54 +418,177 @@ let getDosisUsuario = () => {
     })
 }
 const getDosisRealTime = () => {
-    debugger
-    return new Promise ((resolve,reject) => {
         firebase.auth().onAuthStateChanged((userloged) => {
             if(userloged){
                 db.collection("dosis")
                 .where('userId', '==', userloged.uid )
                 .orderBy('serverDate', 'desc')
                 .limit(1)
-                .onSnapshot((querySnapshot) => {
-            
+                .onSnapshot((querySnapshot) => {   
                     if(querySnapshot.metadata.hasPendingWrites){
-                        querySnapshot.forEach((doc) => {
-                            resolve(doc.data())
-                       
+                        querySnapshot.forEach((data) => {
+                            console.log(data)
+                            let docId = data.data().userId;
+                            let userName =  data.data().user; 
+                            let mascota =  data.data().mascota;
+
+                            let dosis =  data.data().dosisTurno;
+                            let serverDate = new Date();
+                            let medicamento = data.data().medicamento
+                        console.log(docId + userName + mascota + dosis +serverDate + medicamento );
+                        renderRealtime(mascota,userName,dosis,medicamento,serverDate);                       
                         });
                     }else {
                         console.log('nada por escribir')
-                    }
-                    
+                    }                
                 });
-            }else {
-                reject((error) => {
-                    console.log(error)
-                });
-
             }
             //resolve(userloged);
         });
-        
-      
-    })
 }
-getDosisRealTime()
-.then((data)=>{
-    debugger
-console.log(data)
-    let docId = data.userId;
-    let userName =  data.user; 
-    let mascota =  data.mascota;
+const getMascotasRealTime = () => {
+    //debugger
+    firebase.auth().onAuthStateChanged((userloged) => {
+        const user = firebase.auth().currentUser; 
+        //debugger
+        if(userloged != null){
+            db.collection("mascotas")
+            .where('ownerId', '==', user.uid )
+            .orderBy('serverDate', 'desc')
+            .limit(1)
+            .onSnapshot((querySnapshot) => {
+              //  debugger
+                if(querySnapshot.metadata.hasPendingWrites){
+                    querySnapshot.forEach((data) => {
+                        console.log(data)
+                        let name = data.data().mascota;
+                        let edad = data.data().edad;
+                        let peso = data.data().peso;
+                        let chip = data.data().chip;
+                        let foto = data.data().foto;
+                        renderMascotaRealTime(name,edad,peso,chip,foto)
+                    })
+                }else {
+                    console.log('sin mascota realTime')
+                }
+            });
+    
+        }
+    });
+}
+function renderMascotaCard (array) {
+    for(let item of array){
+        let cardContainer = document.createElement('div');
+        let opcion = document.createElement('option')
+        cardContainer.classList.add('petCards__card');
+        //console.log(opcion)
+        opcion.value = `${item.name}`;
+        opcion.append(`${item.name}`)
+        selecMascotaOptions.append(opcion)
+        if(item.foto === '../assets/icons/patita.png'){
+            cardContainer.innerHTML = `<div class="petCards__card-img">
+                                        <img style="
+                                        width: 24px;
+                                        height: 24px;
+                                    " src="${item.foto}" alt="">
+                                        <span>${item.name}</span>
+                                    </div>
+                                    <div class="petCards__card-description">
+                                        <div class="petCards__card-description__edad">
+                                            <span>Edad:</span>
+                                            <span>${item.edad}</span>
+                                        </div>
+                                        <div class="petCards__card-description__peso">
+                                            <span>Peso:</span>
+                                            <span>${item.peso}</span>
+                                        </div>
+                                        <div class="petCards__card-description__chip">
+                                            <span>Chip:</span>
+                                            <span>${item.chip}</span>
+                                        </div>
+                                    </div>`;
+            mascotaMount.append(cardContainer);
+        }else {
 
-    let dosis =  data.dosisTurno;
-    let serverDate = new Date();
-    let medicamento = data.medicamento
-console.log(docId + userName + mascota + dosis +serverDate + medicamento );
-renderRealtime(mascota,userName,dosis,medicamento,serverDate); 
-}).catch(error => {
-    console.log(error)
-})
+            cardContainer.innerHTML = `<div class="petCards__card-img">
+                                        <img src="${item.foto}" alt="">
+                                        <span>${item.name}</span>
+                                    </div>
+                                    <div class="petCards__card-description">
+                                        <div class="petCards__card-description__edad">
+                                            <span>Edad:</span>
+                                            <span>${item.edad}</span>
+                                        </div>
+                                        <div class="petCards__card-description__peso">
+                                            <span>Peso:</span>
+                                            <span>${item.peso}</span>
+                                        </div>
+                                        <div class="petCards__card-description__chip">
+                                            <span>Chip:</span>
+                                            <span>${item.chip}</span>
+                                        </div>
+                                    </div>`;
+            mascotaMount.append(cardContainer);
+        }
+
+    }
+} 
+function renderMascotaRealTime(name,edad,peso,chip,foto) {
+    //debugger
+    let cardContainer = document.createElement('div');
+    let opcion = document.createElement('option')
+    cardContainer.classList.add('petCards__card');
+    //console.log(opcion)
+    opcion.value = `${name}`;
+    opcion.append(`${name}`)
+    selecMascotaOptions.append(opcion)
+    if(foto === '../assets/icons/patita.png'){
+        cardContainer.innerHTML = `<div class="petCards__card-img">
+                                    <img style="
+                                    width: 24px;
+                                    height: 24px;
+                                " src="${foto}" alt="">
+                                    <span>${name}</span>
+                                </div>
+                                <div class="petCards__card-description">
+                                    <div class="petCards__card-description__edad">
+                                        <span>Edad:</span>
+                                        <span>${edad}</span>
+                                    </div>
+                                    <div class="petCards__card-description__peso">
+                                        <span>Peso:</span>
+                                        <span>${peso}</span>
+                                    </div>
+                                    <div class="petCards__card-description__chip">
+                                        <span>Chip:</span>
+                                        <span>${chip}</span>
+                                    </div>
+                                </div>`;
+        mascotaMount.insertAdjacentElement('afterbegin',cardContainer);
+    }else {
+
+        cardContainer.innerHTML = `<div class="petCards__card-img">
+                                    <img src="${foto}" alt="">
+                                    <span>${name}</span>
+                                </div>
+                                <div class="petCards__card-description">
+                                    <div class="petCards__card-description__edad">
+                                        <span>Edad:</span>
+                                        <span>${edad}</span>
+                                    </div>
+                                    <div class="petCards__card-description__peso">
+                                        <span>Peso:</span>
+                                        <span>${peso}</span>
+                                    </div>
+                                    <div class="petCards__card-description__chip">
+                                        <span>Chip:</span>
+                                        <span>${chip}</span>
+                                    </div>
+                                </div>`;
+   
+        mascotaMount.insertAdjacentElement('afterbegin',cardContainer);
+    }
+}
 function renderDosisCard (array) {
 //debugger
     for(let item of array){ 
@@ -582,7 +649,7 @@ function renderDosisCard (array) {
     }
 }
 function renderRealtime(mascota, userName, dosis, medicamento, serverDate){
-    //debugger
+    debugger
     let cardContainer = document.createElement('div');
     cardContainer.classList.add('dosisCards__card');
     
@@ -717,4 +784,6 @@ document.addEventListener("DOMContentLoaded",function() {
     acordion();
     getDosisUsuario();
     getMascotas();
+    getDosisRealTime();
+    getMascotasRealTime();
 });

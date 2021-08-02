@@ -10,9 +10,12 @@ let inputDocID = document.getElementById('eliminarDoc');
 /* variables render */
 let dosisMount = document.querySelector('.dosisCards');
 let mascotaMount = document.querySelector('.petCards');
+let medMount = document.querySelector('.medCards')
 let dosisData = []
 let mascotaData = [];
-let selecMascotaOptions = document.querySelector('#mascotas')
+let medData = [];
+let selecMascotaOptions = document.querySelector('#mascotas');
+let selecMascotaOptMed = document.querySelector('#mascotasmed');
 class dosisContructor {
     constructor(docId, userName, mascota, dosis,serverDate, medicamento){
         
@@ -33,6 +36,15 @@ class mascotaCardConstructor {
         this.foto = foto
     }
 }
+class medContructor {
+    constructor(docId, mascota, medicamento, dosisAmount,administracion){
+        this.docId = docId,
+        this.mascota = mascota,
+        this.medicamento = medicamento,
+        this.dosisAmount = dosisAmount,
+        this.administracion = administracion
+    }
+}
 /* variables render */
 
 // Acordion variables
@@ -40,6 +52,7 @@ let accBtn = document.querySelectorAll('.acordionBtn');
 // modalDosis variables
 let modalDosis = document.querySelector('.modalDosis');
 let ModalMascota = document.querySelector('.ModalMascota');
+let modalMed = document.querySelector('.modalMed');
   /* eliminar */
 let deleteModalDosis = document.querySelector('.modalDosisDelete');
   /* eliminar */
@@ -61,7 +74,11 @@ let femMascota = document.querySelector('#checkF');
 let vetmascota = document.querySelector('#veterinario');
 let vetControl = document.querySelector('#controlVet');
 let photoMascota = document.querySelector('#photo');
-
+// variables formulario Medicamentos
+let formMed = document.querySelector('#formMed');
+let medName = document.querySelector('#medName');
+let dosisAmount = document.querySelector('#dosisAmount');
+let administracion = document.querySelector('#administracion');
 //userData
 let userNameSpan = document.querySelector('#userName');
 //userData
@@ -341,6 +358,51 @@ async function validarFormMascota (ev){
         console.log('No hay user');
     }
 }
+function validarFormMed (ev) {
+    ev.preventDefault()
+    let mascotaName = selectOptionMed () ;
+    let user = firebase.auth().currentUser;
+    if(user != null){
+        if(medName.value != "" && dosisAmount.value != "" && administracion.value != ""){
+            db.collection('medicinas').add({
+                medicina : medName.value,
+                nombre : mascotaName,
+                cantidad : dosisAmount.value,
+                administracion : administracion.value,
+                user : user.displayName,
+                userId : user.uid,
+                serverDate: firebase.firestore.FieldValue.serverTimestamp()
+
+            })
+            .then((docRef) => {
+                debugger
+                setTimeout(()=>{
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Registro enviado',
+                        text: ` Medicamento ${medName.value} registrado para ${mascotaName}`,
+                        buttonsStyling: false,                                            
+                      })
+                      modalMed.style.display = 'none';
+                      formMed.reset();
+                    
+                },700);
+                console.log("Document written with ID: ", docRef.id);
+            })
+            console.log(mascotaName + "" +medName.value  + "" + dosisAmount.value + "" + administracion.value)
+        }else {
+            Swal.fire({
+                icon: 'error',
+                title: 'LLena los campos obligarotios',
+                text: `Ooops...`,
+                buttonsStyling: false,                      
+              })
+        }
+    }else {
+        console.log('no hay user')
+    }
+    
+}
 function showAcc (btn) {
     btn.classList.toggle('active');
     let card = btn.nextElementSibling;
@@ -354,6 +416,10 @@ function showAcc (btn) {
 function selectOption () {
     console.log(selecMascotaOptions.value)
     return selecMascotaOptions.value;
+}
+function selectOptionMed () {
+    console.log(selecMascotaOptMed.value)
+    return selecMascotaOptMed.value;
 }
 let getMascotas = () => {
     firebase.auth().onAuthStateChanged((userloged) => {
@@ -378,7 +444,7 @@ let getMascotas = () => {
                 })
                // console.log(mascotaData);
                 renderMascotaCard(mascotaData); 
-            })
+            }).catch((error) => console.log(error));
         }
     });
 }
@@ -409,11 +475,41 @@ let getDosisUsuario = () => {
                 })
               //  console.log(dosisData);
                 renderDosisCard(dosisData);
-            }) 
+            }).catch((error) => console.log(error));
            
 
         }else {
             console.log('no hay nadie loging')
+        }
+    })
+}
+let getMedicamentos = () => {
+    firebase.auth().onAuthStateChanged((userloged) => {
+        const user = firebase.auth().currentUser;
+        const userName = user.displayName;
+        const userID = user.uid
+        console.log(user.uid)
+        if(userloged != null){
+            db.collection('medicinas')
+            .where('userId', '==', user.uid )
+            .orderBy('serverDate', 'desc')
+            .get()
+            .then ((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    //  debugger
+                    console.log(doc.id, " => ", doc.data());
+                    let docId = doc.id;
+                    let mascota = doc.data().nombre;
+                    let medicamento = doc.data().medicina;
+                    let dosisAmount = doc.data().cantidad;
+                    let administracion = doc.data().administracion;
+                 
+                    medData.push(new medContructor(docId, mascota, medicamento, dosisAmount,administracion))
+
+                })
+                console.log(medData)
+                renderMedCard(medData);
+            }).catch((error) => console.log(error));
         }
     })
 }
@@ -476,15 +572,51 @@ const getMascotasRealTime = () => {
         }
     });
 }
+function renderMedCard(array){
+    for(let item of array){
+        let cardContainer = document.createElement('div');
+        cardContainer.classList.add('medCards__card');
+        cardContainer.innerHTML = `  <div class="medCards__card-title">
+                                        <i class="dosis-icon"></i>
+                                        <span>${item.medicamento}</span>
+                                    </div>
+                                    <div class="medCards__card-table">
+                                        <div class="medCards__card-table__nombre">
+                                            <span>Nombre</span>
+                                            <span>${item.mascota}</span>
+                                        </div>
+
+                                        <div class="medCards__card-table__dosis">
+                                            <span>Dosis</span>
+                                            <span>${item.dosisAmount}</span>
+                                        </div>
+
+                                        <div class="medCards__card-table__administracion">
+                                            <span>Administracion</span>
+                                            <span>${item.administracion}</span>
+                                        </div>
+                                    </div>`
+        
+        medMount.append(cardContainer);
+        
+    }
+}
 function renderMascotaCard (array) {
     for(let item of array){
         let cardContainer = document.createElement('div');
-        let opcion = document.createElement('option')
+        let opcion = document.createElement('option');
+        let opcionMed = document.createElement('option');
         cardContainer.classList.add('petCards__card');
         //console.log(opcion)
         opcion.value = `${item.name}`;
-        opcion.append(`${item.name}`)
+        opcion.append(`${item.name}`);
+        opcionMed.value = `${item.name}`;
+        opcionMed.append(`${item.name}`);
+        
+        
+        //debugger
         selecMascotaOptions.append(opcion)
+        selecMascotaOptMed.append(opcionMed)
         if(item.foto === '../assets/icons/patita.png'){
             cardContainer.innerHTML = `<div class="petCards__card-img">
                                         <img style="
@@ -649,7 +781,7 @@ function renderDosisCard (array) {
     }
 }
 function renderRealtime(mascota, userName, dosis, medicamento, serverDate){
-    debugger
+    //debugger
     let cardContainer = document.createElement('div');
     cardContainer.classList.add('dosisCards__card');
     
@@ -742,17 +874,22 @@ function renderUserData () {
 }
 function acordion() {
     for(let btn of accBtn){
-        
+        //debugger
         btn.addEventListener('click', (event) => {
             if(event.target.classList[0] == "displayBtn"){
                 showAcc(btn);
-            } else if(event.target.classList[0] == "plus"){           
+            } else if(event.target.classList[0] == "plus"){     
+                //debugger      
                 if(btn.nextElementSibling.classList[0] == "dosisCards" ){
                     showModal(modalDosis);            
                     
                 }else if(btn.nextElementSibling.classList[0] == "petCards") {
                     showModal(ModalMascota)
                     
+                }else if(btn.nextElementSibling.classList[0]  == "medCards"){
+                    showModal(modalMed);
+                }else {
+                    console.log(event.target)
                 }
                
             } else if(event.target.classList[0] == "deleteMenos"){
@@ -775,8 +912,10 @@ document.addEventListener("DOMContentLoaded",function() {
     } );
     formDosis.addEventListener('submit', validadFormulario);
     formMascota.addEventListener('submit', validarFormMascota);
+    formMed.addEventListener('submit', validarFormMed )
     elimarDosisForm.addEventListener('submit', eliminarDosis);
-    selecMascotaOptions.addEventListener('change', selectOption)
+    selecMascotaOptions.addEventListener('change', selectOption);
+    selecMascotaOptMed.addEventListener('change', selectOptionMed)
     Home();
     hammburBtn();
     logout();
@@ -784,6 +923,7 @@ document.addEventListener("DOMContentLoaded",function() {
     acordion();
     getDosisUsuario();
     getMascotas();
+    getMedicamentos();
     getDosisRealTime();
     getMascotasRealTime();
 });

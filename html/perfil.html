@@ -162,7 +162,7 @@
                     <p class="deleteMenos">-</p>
                 </div>
                 <div  class="medCards">
-                    <div class="medCards__card">
+                <!--     <div class="medCards__card">
                         <div class="medCards__card-title">
                             <i class="dosis-icon"></i>
                             <span>Medicamentos</span>
@@ -183,7 +183,7 @@
                                 <span>8H</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
 
@@ -277,29 +277,30 @@
                 </form>
             </div>
             
-            <div class="modalMed">
+            <div style="display: none;" class="modalMed" >
                 <div class="modalDosis__close">
                     <i class="close-icon closIconDosisModal" ></i>
                 </div>
-                <form class="ModalMed_form" action="" method="POST" id="formMed">
+                <form  class="modalMed__form" action="" method="POST" id="formMed">
                     <label for="medName">
                         <span>Medicina</span>
                         <input type="text" name="" id="medName">
                     </label>
                     <label for="mascotas">
                         <span>Mascota</span>
-                        <select class="mascotas" id="mascotas">
+                        <select class="mascotas" id="mascotasmed">
                           
                         </select>
                     </label>
-                    <label for="dosis">
-                        <span>dosis</span>
-                        <input type="text" id="dosis">
+                    <label for="dosisAmount">
+                        <span>Cantidad Dosis</span>
+                        <input type="text" id="dosisAmount">
                     </label>
                     <label for="administracion">
                         <span>Administracion</span>
-                        <input type="text">
+                        <input type="text" id="administracion">
                     </label>
+                    <input class="formSection__form-sendBtn" type="submit" value="Enviar">
                 </form>
 
             </div>

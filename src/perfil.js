@@ -431,7 +431,7 @@ function selecOptionEliminar () {
     return eliminarMount.value;
 }
 function selectOptionMascotaDelete(){
-    debugger
+    //debugger
     console.log(selecMascotaDelete.value)
     return selecMascotaDelete.value
 }
@@ -688,7 +688,7 @@ function renderMascotaCard (array) {
     }
 } 
 function renderMascotaRealTime(name,edad,peso,chip,foto,mascotaId) {
-    debugger
+    //debugger
     let cardContainer = document.createElement('div');
     let opcion = document.createElement('option');
     let opcionMed = document.createElement('option');
@@ -903,7 +903,7 @@ function renderRealtime(mascota, userName, dosis, medicamento, serverDate){
 } 
 function eliminarMascota (ev){
     ev.preventDefault();
-    debugger
+    //debugger
     const user = firebase.auth().currentUser;
 
     if(user != null){

@@ -503,7 +503,7 @@ body {
   padding: 2px;
 }
 
-.modalDosis, .modalMed, .ModalMascota, .modalDosisDelete {
+.modalDosis, .modalMed, .modalMascotaDelete, .ModalMascota, .modalDosisDelete {
   display: flex;
   flex-direction: column;
   width: 100%;

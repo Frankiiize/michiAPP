@@ -6,7 +6,9 @@ import {closeModalBtn,showModal} from './components/modal.js';
 var db = firebase.firestore(); 
 //alert('hola')
 let elimarDosisForm = document.querySelector('#elimarDosisForm');
-let inputDocID = document.getElementById('eliminarDoc');
+let eliminarMount = document.getElementById('eliminarDosis');
+let eliminarMascotaForm = document.querySelector('#eliminarMascotaForm');
+
 /* variables render */
 let dosisMount = document.querySelector('.dosisCards');
 let mascotaMount = document.querySelector('.petCards');
@@ -16,6 +18,7 @@ let mascotaData = [];
 let medData = [];
 let selecMascotaOptions = document.querySelector('#mascotas');
 let selecMascotaOptMed = document.querySelector('#mascotasmed');
+let selecMascotaDelete = document.querySelector('#eliminarMascota')
 class dosisContructor {
     constructor(docId, userName, mascota, dosis,serverDate, medicamento){
         
@@ -28,12 +31,13 @@ class dosisContructor {
     }
 }
 class mascotaCardConstructor {
-    constructor(name, edad, peso, chip, foto){
+    constructor(name, edad, peso, chip, foto,mascotaID){
         this.name = name,
         this.edad = edad,
         this.peso = peso,
         this.chip = chip,
-        this.foto = foto
+        this.foto = foto,
+        this.mascotaId = mascotaID
     }
 }
 class medContructor {
@@ -55,6 +59,7 @@ let ModalMascota = document.querySelector('.ModalMascota');
 let modalMed = document.querySelector('.modalMed');
   /* eliminar */
 let deleteModalDosis = document.querySelector('.modalDosisDelete');
+let deleteModalMascota = document.querySelector('.modalMascotaDelete')
   /* eliminar */
 // modalDosis variables
 //variables formulario dosis
@@ -421,6 +426,15 @@ function selectOptionMed () {
     console.log(selecMascotaOptMed.value)
     return selecMascotaOptMed.value;
 }
+function selecOptionEliminar () {
+    console.log(eliminarMount.value)
+    return eliminarMount.value;
+}
+function selectOptionMascotaDelete(){
+    debugger
+    console.log(selecMascotaDelete.value)
+    return selecMascotaDelete.value
+}
 let getMascotas = () => {
     firebase.auth().onAuthStateChanged((userloged) => {
         const user = firebase.auth().currentUser; 
@@ -432,14 +446,16 @@ let getMascotas = () => {
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) =>{
+                    //debugger
                     //console.log(doc.id, " => ", doc.data());
                     let name = doc.data().mascota;
                     let edad = doc.data().edad;
                     let peso = doc.data().peso;
                     let chip = doc.data().chip;
                     let foto = doc.data().foto;
+                    let mascotaID = doc.id
                     //console.log(`${name} ${edad} ${peso} ${chip} ${foto}`)
-                    mascotaData.push(new mascotaCardConstructor(name,edad,peso,chip,foto));
+                    mascotaData.push(new mascotaCardConstructor(name,edad,peso,chip,foto,mascotaID));
 
                 })
                // console.log(mascotaData);
@@ -562,7 +578,8 @@ const getMascotasRealTime = () => {
                         let peso = data.data().peso;
                         let chip = data.data().chip;
                         let foto = data.data().foto;
-                        renderMascotaRealTime(name,edad,peso,chip,foto)
+                        let mascotaId = data.id
+                        renderMascotaRealTime(name,edad,peso,chip,foto,mascotaId )
                     })
                 }else {
                     console.log('sin mascota realTime')
@@ -603,20 +620,25 @@ function renderMedCard(array){
 }
 function renderMascotaCard (array) {
     for(let item of array){
+       // debugger
         let cardContainer = document.createElement('div');
         let opcion = document.createElement('option');
         let opcionMed = document.createElement('option');
+        let opcionDeteleMascota = document.createElement('option')
         cardContainer.classList.add('petCards__card');
         //console.log(opcion)
         opcion.value = `${item.name}`;
         opcion.append(`${item.name}`);
         opcionMed.value = `${item.name}`;
         opcionMed.append(`${item.name}`);
+        opcionDeteleMascota.append(`${item.name}`);
+        opcionDeteleMascota.value = `${item.mascotaId}`;
         
         
         //debugger
-        selecMascotaOptions.append(opcion)
-        selecMascotaOptMed.append(opcionMed)
+        selecMascotaOptions.append(opcion);
+        selecMascotaOptMed.append(opcionMed);
+        selecMascotaDelete.append(opcionDeteleMascota);
         if(item.foto === '../assets/icons/patita.png'){
             cardContainer.innerHTML = `<div class="petCards__card-img">
                                         <img style="
@@ -665,15 +687,24 @@ function renderMascotaCard (array) {
 
     }
 } 
-function renderMascotaRealTime(name,edad,peso,chip,foto) {
-    //debugger
+function renderMascotaRealTime(name,edad,peso,chip,foto,mascotaId) {
+    debugger
     let cardContainer = document.createElement('div');
-    let opcion = document.createElement('option')
+    let opcion = document.createElement('option');
+    let opcionMed = document.createElement('option');
+    let opcionDeteleMascota = document.createElement('option');
     cardContainer.classList.add('petCards__card');
     //console.log(opcion)
     opcion.value = `${name}`;
-    opcion.append(`${name}`)
-    selecMascotaOptions.append(opcion)
+    opcion.append(`${name}`);
+    opcionMed.value = `${name}`;
+    opcionMed.append(`${name}`);
+    opcionDeteleMascota.append(`${name}`);
+    opcionDeteleMascota.value = `${mascotaId}`;
+
+    selecMascotaOptions.insertAdjacentElement('afterbegin',opcion)
+    selecMascotaDelete.insertAdjacentElement('afterbegin',opcionDeteleMascota);
+    selecMascotaOptMed.insertAdjacentElement('afterbegin',opcionMed);
     if(foto === '../assets/icons/patita.png'){
         cardContainer.innerHTML = `<div class="petCards__card-img">
                                     <img style="
@@ -722,11 +753,17 @@ function renderMascotaRealTime(name,edad,peso,chip,foto) {
     }
 }
 function renderDosisCard (array) {
-//debugger
+    //debugger
     for(let item of array){ 
+        //debugger
         let cardContainer = document.createElement('div');
         cardContainer.classList.add('dosisCards__card');
+            cardContainer.dataset.id = `${item.docId}`
         dosisMount.append(cardContainer);
+        let eliminarOption = document.createElement('option');
+        eliminarOption.append(`${item.mascota}`)
+        eliminarOption.value = `${item.docId}`;
+        eliminarMount.append(eliminarOption);
     
     
         let mascota = document.createElement('div');
@@ -838,25 +875,56 @@ function renderRealtime(mascota, userName, dosis, medicamento, serverDate){
 }
  function eliminarDosis (ev) {
     ev.preventDefault();
+    debugger
     const user = firebase.auth().currentUser;
+    let cards = document.querySelectorAll('.dosisCards__card');
+    
+    
+   
     if(user){
         console.log(user.displayName)
-        db.collection("dosis").doc(inputDocID.value).delete()
-        .then(() => {
-            console.log("Document successfully deleted!");
+        db.collection("dosis").doc(selecOptionEliminar()).delete()
+        .then((doc) => {
+            console.log("Document successfully deleted!" + selecOptionEliminar());
             Swal.fire({
                 icon: 'success',
                 title: 'eliminado',
                 buttonsStyling: false,                                            
-              }) 
+              })
+              .then(() => {
+                  location.reload();
+              })
         }).catch((error) => {
             console.error("Error removing document: ", error);
         });
     }else {
         console.log('no hay user')
     }
-    
 } 
+function eliminarMascota (ev){
+    ev.preventDefault();
+    debugger
+    const user = firebase.auth().currentUser;
+
+    if(user != null){
+        db.collection('mascotas').doc(selectOptionMascotaDelete()).delete()
+        .then((doc) => {
+            console.log("Document successfully deleted!" + selecOptionEliminar() );
+            Swal.fire({
+                icon: 'success',
+                title: 'eliminado',
+                buttonsStyling: false,                                            
+              })
+              .then(() => {
+                  location.reload();
+              })
+        }).catch((error) => {
+            console.error("Error removing document: ", error)
+        });
+    } else {
+        console.log('no hay user');
+    }
+}
 function renderUserData () {
     let imgMout = document.querySelector('.userContainer__img');
     firebase.auth().onAuthStateChanged((user)=>{
@@ -891,10 +959,11 @@ function acordion() {
                 }else {
                     console.log(event.target)
                 }
-               
             } else if(event.target.classList[0] == "deleteMenos"){
                 if(btn.nextElementSibling.classList[0] == "dosisCards" ){           
                     showModal(deleteModalDosis);
+                } else if(btn.nextElementSibling.classList[0] == "petCards"){
+                    showModal(deleteModalMascota);
                 }
             } 
             else {
@@ -909,13 +978,16 @@ document.addEventListener("DOMContentLoaded",function() {
     console.log(localStorage)
     photoMascota.addEventListener('change', () => {
         upLoadPetPhoto();
-    } );
+    });
     formDosis.addEventListener('submit', validadFormulario);
     formMascota.addEventListener('submit', validarFormMascota);
     formMed.addEventListener('submit', validarFormMed )
     elimarDosisForm.addEventListener('submit', eliminarDosis);
+    eliminarMascotaForm.addEventListener('submit',eliminarMascota);
     selecMascotaOptions.addEventListener('change', selectOption);
-    selecMascotaOptMed.addEventListener('change', selectOptionMed)
+    selecMascotaOptMed.addEventListener('change', selectOptionMed);
+    selecMascotaDelete.addEventListener('change', selectOptionMascotaDelete )
+    eliminarMount.addEventListener('change', selecOptionEliminar)
     Home();
     hammburBtn();
     logout();

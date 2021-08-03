@@ -267,6 +267,9 @@ body {
         }      
     }
 }
+.modalMascotaDelete{
+    @extend .modalDosis
+}
 .modalMed{
     @extend .modalDosis;
     &__form{

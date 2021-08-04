@@ -20,7 +20,7 @@ export  function hammburBtn ()  {
                         userPhotoDisplay.src = `${user.photoURL}`;
                     } else {
                         userNameDisplay.innerHTML = `${email.value}`;
-                        userPhotoDisplay.src = "/public/assets/userImg.png";
+                        userPhotoDisplay.src = "assets/userImg.png";
                     } 
                 } else {
                     userLoggedContainer.style.display = 'none';

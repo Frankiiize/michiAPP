@@ -436,7 +436,7 @@ function selectOptionMascotaDelete(){
     return selecMascotaDelete.value
 }
 let getMascotas = () => {
-    debugger
+    //debugger
     firebase.auth().onAuthStateChanged((userloged) => {
         const user = firebase.auth().currentUser; 
         //console.log(user)
@@ -470,6 +470,7 @@ let getDosisUsuario = () => {
         const user = firebase.auth().currentUser;
         
         if(user) {
+            debugger
             const userEmail = user.email;
             //debugger
             //console.log(`usuario ${userEmail}`);
@@ -479,7 +480,7 @@ let getDosisUsuario = () => {
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                  //  debugger
+                  debugger
                     //console.log(doc.id, " => ", doc.data());
                     let docId = doc.id;
                     let userName =  doc.data().user; 

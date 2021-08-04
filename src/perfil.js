@@ -4,6 +4,7 @@ import {logout} from './utils/login.js';
 import {closeModalBtn,showModal} from './components/modal.js';
 
 var db = firebase.firestore(); 
+//console.log(db)
 //alert('hola')
 let elimarDosisForm = document.querySelector('#elimarDosisForm');
 let eliminarMount = document.getElementById('eliminarDosis');
@@ -98,10 +99,11 @@ function validadFormulario (ev) {
     let user = firebase.auth().currentUser;  
     let ischeck1 = checkD.checked;
     let ischeck2 = checkN.checked;
-//debugger
+
     if (user != null){
         if(ischeck1 ^ ischeck2 && mascotaName != '' && medicamento.value !=''){
             if(ischeck1){
+                debugger
                 db.collection("dosis").add({
                     user: user.displayName,
                     mascota: mascotaName,
@@ -130,6 +132,8 @@ function validadFormulario (ev) {
                     mascota: mascotaName,
                     dosisTurno: checkN.value,
                     medicamento: medicamento.value,
+                    userEmail: user.email,
+                    userId: user.uid,
                     serverDate: firebase.firestore.FieldValue.serverTimestamp()
                 })
                 .then((docRef) => {
@@ -468,19 +472,20 @@ let getMascotas = () => {
 let getDosisUsuario = () => {
     firebase.auth().onAuthStateChanged((userloged) => {
         const user = firebase.auth().currentUser;
-        
+        console.log(user.uid)
         if(user) {
             const userEmail = user.email;
-            debugger
+            //debugger
             //console.log(`usuario ${userEmail}`);
             db.collection('dosis')
             .where('userId', '==', user.uid )
             .orderBy('serverDate', 'desc')
             .get()
             .then((querySnapshot) => {
+                //debugger
                 querySnapshot.forEach((doc) => {
-                    debugger
-                    //console.log(doc.id, " => ", doc.data());
+                    //debugger
+                    console.log(doc.id, " => ", doc.data());
                     let docId = doc.id;
                     let userName =  doc.data().user; 
                     let mascota =  doc.data().mascota;
@@ -490,7 +495,7 @@ let getDosisUsuario = () => {
                     let medicamento = doc.data().medicamento
                     dosisData.push(new dosisContructor(docId, userName, mascota, dosis,serverDate, medicamento))
                 })
-              //  console.log(dosisData);
+                console.log(dosisData);
                 renderDosisCard(dosisData);
             }).catch((error) => console.log(error));
            
@@ -505,7 +510,7 @@ let getMedicamentos = () => {
         const user = firebase.auth().currentUser;
         const userName = user.displayName;
         const userID = user.uid
-        console.log(user.uid)
+       // console.log(user.uid)
         if(userloged != null){
             db.collection('medicinas')
             .where('userId', '==', user.uid )
@@ -514,7 +519,7 @@ let getMedicamentos = () => {
             .then ((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     //  debugger
-                    console.log(doc.id, " => ", doc.data());
+                   // console.log(doc.id, " => ", doc.data());
                     let docId = doc.id;
                     let mascota = doc.data().nombre;
                     let medicamento = doc.data().medicina;
@@ -524,7 +529,7 @@ let getMedicamentos = () => {
                     medData.push(new medContructor(docId, mascota, medicamento, dosisAmount,administracion))
 
                 })
-                console.log(medData)
+                //console.log(medData)
                 renderMedCard(medData);
             }).catch((error) => console.log(error));
         }
@@ -976,7 +981,7 @@ function acordion() {
 }
 document.addEventListener("DOMContentLoaded",function() {
     localStorage.clear();
-    console.log(localStorage)
+   // console.log(localStorage)
     photoMascota.addEventListener('change', () => {
         upLoadPetPhoto();
     });

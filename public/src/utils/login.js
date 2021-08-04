@@ -138,7 +138,7 @@ export function logout () {
               })
               setTimeout(() => {
                 loginContainer.style.display = 'flex';
-                window.location = '../../html/index.html';
+                window.location = './index.html';
               },500);
         }).catch((error) => {
             // An error happened.

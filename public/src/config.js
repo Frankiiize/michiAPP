@@ -1,5 +1,5 @@
 
-const firebaseConfig = {
+ const firebaseConfig = {
   apiKey: "AIzaSyDrWg5ZFGoiwlEPee98ifvvYtVgLZSPCps",
   authDomain: "registrodosis.firebaseapp.com",
   databaseURL: "https://registrodosis-default-rtdb.firebaseio.com",

@@ -1,49 +1,31 @@
+import {hammburBtn, Home} from './components/hamburger.js'
+import {logout,loginWhitGoogle,validarLogin} from './utils/login.js'
 
-//variables formulario login
-let headerBtn = document.querySelector('#hamburger');
-let loginForm = document.querySelector('#loginForm');
-let email = document.querySelector('#email');
-let password = document.querySelector('#password');
-let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
 let googleBtn = document.querySelector('#google');
-var provider = new firebase.auth.GoogleAuthProvider();
-let loginContainer = document.querySelector('.headerContainer__login');
-let userLoggedContainer = document.querySelector('.headerContainer__login-logged');
-let loginEmailBtn = document.querySelector('#loginBtn')
-    
-    //user logged
-let userNameDisplay = document.querySelector('#userNameDisplay');
-let userPhotoDisplay = document.querySelector('#userPhoto');
-    //user logged
-    //logout
-let logoutBtn = document.querySelector('#logoutBtn');
-    //logout
 
-//variables formulario login
 
 //variables baseDatos
 var db = firebase.firestore(); 
+class dbData {
+    constructor(docId, userName, mascota, fecha, dosis,serverDate){
+        
+        this.docId = docId,
+        this.userName = userName,
+        this.mascota = mascota,
+        this.fecha = fecha,
+        this.dosisTurno = dosis,
+        this.serverDate = serverDate
+    }
+}
 //variables baseDatos
 
 //variables imprimir data
 let docData = [];
+let dataDosis = []
 let dataMout = document.querySelector('#dataSection');
 
 //variables imprimir data
-
-//sweeALERTSCONFIG
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 2000,
-    //timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
-//sweeALERTSCONFIG
 
 
 //variables formulario dosis
@@ -55,69 +37,7 @@ let fecha = document.querySelector('#fecha');
 let print = document.querySelector('#print')
 //variables formulario dosis
 
-let  validarLogin =  (ev) => {
-    loginEmailBtn.onclick = () => {
 
-      
-        if(email.value && password.value != ''){
-            if(emailRegex.test(email.value)){
-                let userEmail = email.value;
-                let userPassword = password.value;
-                
-                firebase.auth().signInWithEmailAndPassword(userEmail, userPassword)
-                .then((userCredential) => {
-                    // Signed in
-                    
-                    //debugger
-                    var user = userCredential.user;
-                    if(user && loginContainer.style.display == 'flex'){
-                        console.log(`${user.displayName} logeo con exito`);
-                        loginContainer.style.display = 'none';
-                        if(user.displayName == null){
-                            Toast.fire({
-                                icon: 'success',
-                                title: `Bienvenido ${userEmail} `
-                              })
-                            } else {
-                                Toast.fire({
-                                    icon: 'success',
-                                    title: `Bienvenido ${user.displayName}`
-                                  })
-                                }
-
-
-                    } 
-                   // return;
-                })
-                .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    console.log(errorCode)
-                    console.log(errorMessage)
-                    Toast.fire({
-                        icon: 'error',
-                        title: `${errorMessage}`
-                      })
-                });
-    
-            } else {
-                console.log('email no valido');
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Email no valido'
-                  })
-            }
-        } else {
-            console.log('completa los campos');
-          
-            Toast.fire({
-                icon: 'error',
-                title: 'Completa los campos'
-              })
-              
-        }
-    }
-}
 
 
 function validadFormulario (ev) {
@@ -135,6 +55,8 @@ function validadFormulario (ev) {
                     mascota: name.value,
                     dosisTurno: checkD.value,
                     fecha: fecha.value,
+                    userEmail: user.email,
+                    userId: user.uid,
                     serverDate: firebase.firestore.FieldValue.serverTimestamp()
                 })
                 .then((docRef) => {
@@ -197,144 +119,88 @@ function validadFormulario (ev) {
           })
     }
 }
-
-function  loginWhitGoogle () {
-    //debugger
-    firebase.auth()
-    .signInWithPopup(provider)
-    .then((result) => {
-        /* @type {firebase.auth.OAuthCredential} */
-        var credential = result.credential;
-
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        //debugger
-        console.log('paso' + user.displayName);
-        loginContainer.style.display = 'none';
-        Toast.fire({
-            icon: 'success',
-            title: `Bienvenido ${user.displayName}`
-          })
-        
-        
-        // ...
-    }).catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        console.error(error.message)
-        console.error(credential)
-        Swal.fire({
-            icon: 'error',
-            title: `${errorCode} ${email}`,
-            text: `${errorMessage}`,
-            buttonsStyling: false,                      
-          })
-        // ...
-    });
-}
-
-
-/* let fireListener = () => {
-
-    firebase.auth().onAuthStateChanged(user => {
-        //debugger
-            if(user){
-                console.log(`usuario ${user.displayName}`);
-                
-              
-
-            } else {
-                console.log('no hay usuario')
-            }
-         
-        })
-} */
-
-
-
-let hammburBtn = () => {
-    headerBtn.onclick = () => { 
-        //debugger
-        headerBtn.classList.toggle("change");
-        firebase.auth().onAuthStateChanged((user) => {
-            if(user && loginContainer.style.display == 'none'){
-                if(userLoggedContainer.style.display == 'none' ){
-                    userLoggedContainer.style.display = 'flex';
+let consultarEnRealTime = () => {
+    firebase.auth().onAuthStateChanged((userloged) => {
+        const user = firebase.auth().currentUser;
+        if(user){
+            console.log(user.email)
+            db.collection("dosis")
+            .where('userId', '==', user.uid )
+            .orderBy('serverDate', 'desc')
+            .limit(1)
+            .onSnapshot((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
                     //debugger
-                    if(user.photoURL && user.displayName != null){
-                        userNameDisplay.innerHTML = `${user.displayName}`;
-                        userPhotoDisplay.src = `${user.photoURL}`;
-                    } else {
-                        userNameDisplay.innerHTML = `${email.value}`;
-                        userPhotoDisplay.src = "assets/userImg.png";
-                    } 
-                } else {
-                    userLoggedContainer.style.display = 'none';
-                }
+                    if (querySnapshot.metadata.hasPendingWrites) {        
+                            let docId = doc.id;
+                            let userName =  doc.data().user; 
+                            let mascota =  doc.data().mascota;
+                            let fecha =  doc.data().fecha;
+                            let dosis =  doc.data().dosisTurno;
+                            let serverDate = doc.data().serverDate;
+                            
+                            console.log(docId + userName + mascota +fecha +dosis +serverDate)
+                            //dataDosis.push(new dbData(userName,mascota,fecha,dosis,dosis,serverDate))
+                            //console.log(dataDosis);
+                            renderRealtime(userName,mascota,fecha,dosis,dosis,serverDate);
+                        } else {
+                            return console.log('nada por escribir')
+                        }
+                } )
                 
-                
-            } else {
-                if(user == null ){
-                    if(loginContainer.style.display == 'none'){
-                        loginContainer.style.display = 'flex';
+               
+            })
+        }
+        else {
+            console.log('no hay user')
+        }
+    })
+   
+   
+}
+
+function renderRealtime (userName, mascota, fecha, dosis) {
+    debugger
+    let divCards = document.createElement('div');
+    divCards.classList = 'dataSection__cardsContainer';
+
+    let userContainer = document.createElement('div');
+    let mascotaContainer = document.createElement('div');
+    let fechaContainer = document.createElement('div');
+    let dosisContainer = document.createElement('div');
     
-                    } else {
+    userContainer.classList = 'dataSection__cardsContainer-user';
+    mascotaContainer.classList = 'dataSection__cardsContainer-mascota';
+    fechaContainer.classList = 'dataSection__cardsContainer-fecha';
+    dosisContainer.classList = 'dataSection__cardsContainer-dosis'
+
+    userContainer.innerHTML = `<i class="user-icon"></i>
+                               <span>Modificado:</span>
+                               <span>${userName}</span>`;
+
+    mascotaContainer.innerHTML = `<i class="mascota-icon"></i>
+                                  <span>Mascota:</span>
+                                  <span>${mascota}</span>`;
+
+    fechaContainer.innerHTML = `<i class="fecha-icon"></i>
+                                <span>fecha:</span>
+                                <span>${fecha}</span>`;
+
+    dosisContainer.innerHTML = `<i class="dosis-icon"></i>
+                                <span>Dosis:</span>
+                                 <span>${dosis}</span>`;
+                               
+    divCards.append(mascotaContainer);
+    divCards.append(userContainer);
+    divCards.append(fechaContainer);
+    divCards.append(dosisContainer);
+    dataMout.insertAdjacentElement('afterbegin',divCards);
     
-                        loginContainer.style.display = 'none';
-                    }
-                }
-            }           
-        })
-    }
+    //dataMout.append(divCards);
+
 }
 
-
-function logout () {
-    logoutBtn.onclick = () =>{
-
-        firebase.auth().signOut()
-        .then(() => {
-            // Sign-out successful.
-            console.log('Sign-out successful');
-            userLoggedContainer.style.display = 'none';
-            Toast.fire({
-                icon: 'info',
-                title: 'Cierre de sesión exitoso'
-              })
-        }).catch((error) => {
-            // An error happened.
-            console.error(error);
-            Toast.fire({
-                icon: 'error',
-                title: '${error.message}'
-              })
-          });
-    }
-}
-
-class dbData {
-    constructor(docId, userName, mascota, fecha, dosis,serverDate){
-        
-        this.docId = docId,
-        this.userName = userName,
-        this.mascota = mascota,
-        this.fecha = fecha,
-        this.dosisTurno = dosis,
-        this.serverDate = serverDate
-    }
-}
-
-
-
-
-let consultarDosis = async () => {
+/*  let consultarDosis = async () => {
    
     await db.collection("dosis")
     .orderBy("serverDate", "desc").get()
@@ -352,21 +218,20 @@ let consultarDosis = async () => {
             let serverDate = doc.data().serverDate;
             docData.push(new dbData(docId, userName, mascota,fecha,dosis,serverDate))
             //renderData(userName,mascota,fecha,dosisTurno);
-            console.log(docData)
+            //console.log(docData)
         })
     }).catch(error => {
         console.error(error);
     });
     //debugger
-
-    console.log(docData)
+    //console.log(docData)
     renderDocData (docData) ;
-}
+}  */
 
 function renderDocData (array) {
    for(let item of array){
        //debugger
-        console.log(item.docId)
+        //console.log(item.docId)
         let divCards = document.createElement('div');
         divCards.classList = 'dataSection__cardsContainer';
 
@@ -401,22 +266,57 @@ function renderDocData (array) {
         divCards.append(fechaContainer);
         divCards.append(dosisContainer);
         dataMout.append(divCards);
+        dataMout.classList.add('data');
 
 
    }
+}
+let getDosisUsuario = () => {
+    firebase.auth().onAuthStateChanged((userloged) => {
+        const user = firebase.auth().currentUser;
+        
+        if(user) {
+            const userEmail = user.email;
+            //debugger
+            //console.log(`usuario ${userEmail}`);
+            db.collection('dosis')
+            .where('userId', '==', user.uid )
+            .orderBy('serverDate', 'desc')
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    //console.log(doc.id, " => ", doc.data());
+                    let docId = doc.id;
+                    let userName =  doc.data().user; 
+                    let mascota =  doc.data().mascota;
+                    let fecha =  doc.data().fecha;
+                    let dosis =  doc.data().dosisTurno;
+                    let serverDate = doc.data().serverDate;
+                    docData.push(new dbData(docId, userName, mascota,fecha,dosis,serverDate))
+                })
+                //console.log(docData);
+                renderDocData(docData);
+            }) 
+           
+
+        }else {
+            console.log('no hay nadie loging')
+        }
+    })
 }
 
 document.addEventListener("DOMContentLoaded",function() {
     form.addEventListener('submit', validadFormulario);
     googleBtn.addEventListener('click',loginWhitGoogle);
-
+   
     hammburBtn();
     validarLogin();
+    Home();
     logout();
-    consultarDosis();
- 
+  
+    consultarEnRealTime();
+    getDosisUsuario();
+    //getMascotasUsuario();
 
-
-
-   
 });
+

@@ -218,7 +218,7 @@ async function validarFormMascota (ev){
         console.log(user);  
         if(check1 ^ check2 && nameMascota.value != ""  && chipMascota.value != ""  && pesoMascota.value != "" && edadMascota.value != "" ){
             if(check1 && localStorage.length != 0){ 
-                debugger
+               // debugger
                 console.log(+ nameMascota.value + nameMascota.value  + chipMascota.value  + pesoMascota.value + user.uid + vetmascota.value);
                  db.collection('mascotas').add({
                     mascota : nameMascota.value,
@@ -235,7 +235,7 @@ async function validarFormMascota (ev){
                 
                 })
                 .then((docRef) => {
-                    debugger
+                   // debugger
                     setTimeout(()=>{
                         Swal.fire({
                             icon: 'success',
@@ -380,7 +380,7 @@ function validarFormMed (ev) {
 
             })
             .then((docRef) => {
-                debugger
+                //debugger
                 setTimeout(()=>{
                     Swal.fire({
                         icon: 'success',
@@ -470,7 +470,7 @@ let getDosisUsuario = () => {
         const user = firebase.auth().currentUser;
         
         if(user) {
-            debugger
+            //debugger
             const userEmail = user.email;
             //debugger
             //console.log(`usuario ${userEmail}`);
@@ -480,7 +480,7 @@ let getDosisUsuario = () => {
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                  debugger
+                  //debugger
                     //console.log(doc.id, " => ", doc.data());
                     let docId = doc.id;
                     let userName =  doc.data().user; 
@@ -877,7 +877,7 @@ function renderRealtime(mascota, userName, dosis, medicamento, serverDate){
 }
  function eliminarDosis (ev) {
     ev.preventDefault();
-    debugger
+    //debugger
     const user = firebase.auth().currentUser;
     let cards = document.querySelectorAll('.dosisCards__card');
     

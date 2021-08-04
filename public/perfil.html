@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/9b73edbcb0.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/perfil.css">
+</head>
+<body>
+    <div class="container">
+        <header class="headerContainer">
+            <div class="headerContainer__icons">
+                <div class="headerContainer__icons-logo">
+                    <img id="logo" src="/assets/logo.png" alt="logo gatito">
+                </div>
+                <div class="headerHamburger" id="hamburger">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </div>
+
+            <div class="headerContainer__login" style="display: none;">
+                
+                <form id="loginForm"  action="" method="POST">
+                    <label for="email">
+                        <input type="text" name="email" id="email" placeholder="Email" autocomplete="email">
+                    </label>
+                    <label for="password">
+                        <input type="password" name="password" id="password" placeholder="password" autocomplete="current-password">
+                    </label>
+                    <input class="headerContainer__login-sendBtn" type="button" value="Login" id="loginBtn">
+                </form>
+               
+
+                <div class="headerContainer__login-rsLogin">
+                    <span>Login with</span>
+                    <i class="icon-google fab fa-google fa-2x" id="google"></i>
+                </div>
+
+            </div>
+
+            
+            <div class="headerContainer__login-logged" id="userLogged" style="display: none;">
+                <div class="headerContainer__login-logged__user">
+                    <img width="50px" src="/assets/userImg.png" alt="usuer photo" id="userPhoto">
+                    <a href="perfil.html" id="userNameDisplay">User Name</a>
+                </div>
+                <input type="button" class="headerContainer__login-sendBtn" value="Cerrar Sesion" name="" id="logoutBtn">
+
+            </div> 
+        
+            
+        </header>
+        <!-- <h1>Dosis administrada</h1>
+        <form id="elimarDosisForm" action="">
+            <label for="eliminar"></label>
+            <input type="text" name="eliminar" id="eliminarDoc">
+            <input type="submit" id="eliminar" value="Eliminando ando">
+        </form> -->
+        <main class="main">
+
+            <div class="userContainer">
+                <div class="userContainer__img">
+                    
+                </div>
+                <div class="userContainer__info">
+                    <span id="userName"></span>
+                </div>
+            </div>
+
+
+            <div class="acordContainer">
+
+                <div class="acordionBtn">
+                    <button class="displayBtn" >Mascotas</button>
+                    <p class="plus">+</p>
+                    <p class="deleteMenos">-</p>
+                </div>
+                <div  class="petCards">
+                    <!-- <div class="petCards__card">
+                        <div class="petCards__card-img">
+                            <img src="../assets/cat-solid.svg" alt="">
+                            <span>mascotaName</span>
+                        </div>
+                        <div class="petCards__card-description">
+                            <div class="petCards__card-description__edad">
+                                <span>Edad:</span>
+                                <span>1</span>
+                            </div>
+                            <div class="petCards__card-description__peso">
+                                <span>Peso:</span>
+                                <span>1kg</span>
+                            </div>
+                            <div class="petCards__card-description__chip">
+                                <span>Chip:</span>
+                                <span>1234567abcdfg</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="petCards__card">
+                        <div class="petCards__card-img">
+                            <img src="../assets/cat-solid.svg" alt="">
+                            <span>mascotaName</span>
+                        </div>
+                        <div class="petCards__card-description">
+                            <div class="petCards__card-description__edad">
+                                <span>Edad:</span>
+                                <span>1</span>
+                            </div>
+                            <div class="petCards__card-description__peso">
+                                <span>Peso:</span>
+                                <span>1kg</span>
+                            </div>
+                            <div class="petCards__card-description__chip">
+                                <span>Chip:</span>
+                                <span>1234567abcdfg</span>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+                <div class="acordionBtn">
+                    <button class="displayBtn" >Dosis</button>
+                    <p class="plus" id="plus">+</p>
+                    <p class="deleteMenos">-</p>
+                </div>
+                    
+                <div class="dosisCards">
+                    <!-- <div class="dosisCards__card">
+                        <div class="dosisCards__card-mascota">
+                            <i class="mascota-icon"></i>
+                            <span>mascotaName</span>
+                        </div>
+
+                        <div class="dosisCards__card-user">
+                            <i class="user-icon"></i>
+                            <span>UserName</span>
+                        </div>
+
+                        <div class="dosisCards__card-med">
+                            <i class="dosis-icon"></i>
+                            <span>Medicamento</span>
+                        </div>
+
+                        <div class="dosisCards__card-date">
+                            <i class="fecha-icon"></i>
+                            <span>date</span>
+                        </div>
+                    </div> -->
+                </div>
+
+
+                <div class="acordionBtn">
+                    <button class="displayBtn" >medicamentos</button>
+                    <p class="plus">+</p>
+                    <p class="deleteMenos">-</p>
+                </div>
+                <div  class="medCards">
+                <!--     <div class="medCards__card">
+                        <div class="medCards__card-title">
+                            <i class="dosis-icon"></i>
+                            <span>Medicamentos</span>
+                        </div>
+                        <div class="medCards__card-table">
+                            <div class="medCards__card-table__nombre">
+                                <span>Nombre</span>
+                                <span>NombreNombre</span>
+                            </div>
+    
+                            <div class="medCards__card-table__dosis">
+                                <span>Dosis</span>
+                                <span>1Ml</span>
+                            </div>
+    
+                            <div class="medCards__card-table__administracion">
+                                <span>Administracion</span>
+                                <span>8H</span>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+
+
+            </div>
+            
+            <div style="display: none;" class="modalDosis">
+                <div class="modalDosis__close">
+                    <i class="close-icon closIconDosisModal" ></i>
+                </div>
+                <form action="" method="post" id="form" class="modalDosis__form">
+                    <label for="mascotas">
+                        <span>Mascota</span>
+                        <select class="mascotas" id="mascotas">
+                        </select>
+                    </label>
+                    <label for="check1">
+                        <span>dia</span>
+                        <input type="checkbox" name="tarde" id="dia" value="dia"> 
+                    </label>
+                    <label for="check2">
+                        <span>noche</span> 
+                        <input type="checkbox" name="noche" id="noche" value="noche"> 
+                    </label>
+                    <label for="medicamento" >
+                        <span>Medicamento</span>
+                        <input type="text" name="medicamento" id="medicamento">
+                    </label>
+                    <input class="formSection__form-sendBtn" type="submit" value="Enviar">
+                </form>
+            </div>
+            <div style="display: none;" class="modalDosisDelete">
+                <div class="modalDosis__close">
+                    <i class="close-icon closIconDosisModal"></i>
+                </div>
+                <form id="elimarDosisForm" class="modalDosis__form" action="">
+                    <label for="eliminarDosis">
+                        <span>Id Dosis</span>
+                        <select name="" id="eliminarDosis"></select>
+                    </label>
+                    <input type="submit" id="eliminar" value="Eliminar">
+                </form>          
+
+            </div>
+
+            <div style="display: none;" class="ModalMascota">
+                <div class="modalDosis__close">
+                    <i class="close-icon closIconDosisModal" ></i>
+                </div>
+                <form class="ModalMascota__form" method="POST" id="formMascota" >
+                    <label for="mascota">
+                        <span>Nombre</span>
+                        <input type="text" placeholder="mascota" id="mascota">
+                    </label>
+                    <label for="chip">
+                        <span>Chip N°</span>
+                        <input type="text" placeholder="000-000" id="chip">
+                    </label>
+                    <label for="peso">
+                        <span>Peso</span>
+                        <input type="number" placeholder="Kg" id="peso">
+                    </label>
+                    <label for="edad">
+                        <span>Peso</span>
+                        <input type="number" placeholder="Edad" id="edad">
+                    </label>
+                    <label for="checkM">
+                        <span>M</span>
+                        <input type="checkbox" name="" id="checkM" value="masculino">
+                    </label>
+                    <label for="checkF">
+                        <span>F</span>
+                        <input type="checkbox" name="" id="checkF" value="femenino">
+                    </label>
+                    <label for="veterinario">
+                        <span>veterinario</span>
+                        <input type="text" placeholder="Veterinario" id="veterinario"> 
+                    </label>
+                    <label for="controlVet">
+                        <span>Ultimo Control</span>
+                        <input type="date" name="controlVet" id="controlVet">
+                    </label>
+                    <label class="ModalMascota__form-foto" for="photo">
+                        <span>Foto</span>
+                        <div class="ModalMascota__form-upLoad">
+                            <input type="file" name="" id="photo" >
+
+                            <div style="display: none;" class="progesBar"></div>
+                        </div>
+                    </label>
+                    <input class="ModalMascota__form-sendBtn" type="submit" value="Enviar">
+                </form>
+            </div>
+            <div style="display: none;" class="modalMascotaDelete">
+                <div class="modalDosis__close">
+                    <i class="close-icon closIconDosisModal"></i>
+                </div>
+                <form id="eliminarMascotaForm" class="modalDosis__form" action="" >
+                    <label for="eliminarMascota">
+                        <span>Id Mascota</span>
+                        <select name="" id="eliminarMascota">
+                            
+                        </select>
+                    </label>
+                    <input type="submit" value="Eliminar">
+                </form>
+
+            </div>
+            
+            <div style="display: none;" class="modalMed" >
+                <div class="modalDosis__close">
+                    <i class="close-icon closIconDosisModal" ></i>
+                </div>
+                <form  class="modalMed__form" action="" method="POST" id="formMed">
+                    <label for="medName">
+                        <span>Medicina</span>
+                        <input type="text" name="" id="medName">
+                    </label>
+                    <label for="mascotas">
+                        <span>Mascota</span>
+                        <select class="mascotas" id="mascotasmed">
+                          
+                        </select>
+                    </label>
+                    <label for="dosisAmount">
+                        <span>Cantidad Dosis</span>
+                        <input type="text" id="dosisAmount">
+                    </label>
+                    <label for="administracion">
+                        <span>Administracion</span>
+                        <input type="text" id="administracion">
+                    </label>
+                    <input class="formSection__form-sendBtn" type="submit" value="Enviar">
+                </form>
+
+            </div>
+
+        </main>
+        
+
+
+        
+    </div>
+         
+      <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-storage.js"></script>
+    
+
+    <!-- Previously loaded Firebase SDKs -->
+    <!-- iniciador firebase, configuracion -->
+    <script type="module" src="/src/config.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="sweetalert2.all.min.js"></script> -->
+    <!-- my scripts -->
+    <!-- <script src="src/dosis.js"></script> -->
+    <script type="module" src="/src/perfil.js"></script>
+</body>
+</html>

@@ -436,6 +436,7 @@ function selectOptionMascotaDelete(){
     return selecMascotaDelete.value
 }
 let getMascotas = () => {
+    debugger
     firebase.auth().onAuthStateChanged((userloged) => {
         const user = firebase.auth().currentUser; 
         //console.log(user)

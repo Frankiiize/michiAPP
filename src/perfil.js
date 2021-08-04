@@ -471,7 +471,7 @@ let getDosisUsuario = () => {
         
         if(user) {
             const userEmail = user.email;
-            //debugger
+            debugger
             //console.log(`usuario ${userEmail}`);
             db.collection('dosis')
             .where('userId', '==', user.uid )
@@ -479,7 +479,7 @@ let getDosisUsuario = () => {
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                  //  debugger
+                    debugger
                     //console.log(doc.id, " => ", doc.data());
                     let docId = doc.id;
                     let userName =  doc.data().user; 
